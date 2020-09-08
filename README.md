@@ -1,68 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project Name (Think: Website/Game Name)
 
-## Available Scripts
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-In the project directory, you can run:
 
-### `npm start`
+An image of the product logo.  
+![logo](images/image.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [Brief Description](#brief-description)
+- [How to use](#how-to-use)
+- [Installation](#installation)
+- [Functionality](#functionality)
+- [Contributing](#contributing)
+- [Acknowledgements and Resources](#acknowledgements-and-resources)
 
-### `npm test`
+<!-- Breif Description -->
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Brief Description
+(Ex: Uses, Game Rules, Overview)
 
-### `npm run build`
+> Here I put the what is this and the why.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to use
+(can call strategy or uses can sometimes be conbined with above)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Here I put the answers to How
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Built With
 
-### `npm run eject`
+- ex: javascript
+- ex: CSS
+- ex: HTML
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Fork this repository:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+https://github.com/relyt4me/stretch-project
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Clone your forked repository**
 
-## Learn More
+`git clone` and the copied URL
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Change into the directory and install the project dependencies**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`cd` into directory and run `npm install` for dependencies
 
-### Code Splitting
+### How to see the product
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Here should be the info on running index.html or other last step opeining locally
+[Here should also be the link to the GitHub pages if necessary](https://google.com)
 
-### Analyzing the Bundle Size
+### Live version location if NEEDED
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+[Live Link](https://google.com)
 
-### Making a Progressive Web App
+## Functionality
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![screenshot](images/image.png)
 
-### Advanced Configuration
+<!-- CONTRIBUTING -->
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Contributing
 
-### Deployment
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.  
+   
+See the [open issues](https://github.com/relyt4me/stretch-project/issues) for a list of proposed features (and known issues).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- Fork the Project
 
-### `npm run build` fails to minify
+- Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+
+- Push to the Branch (`git push origin feature/AmazingFeature`)
+
+- Open a Pull Request
+
+## Authors
+
+👤 **Name**
+- Github: [gitHubHandle](link)
+- other link info if needed
+
+👤 **Name**
+- Github: [gitHubHandle](link)
+- other link info if needed
+
+
+## Acknowledgements and Resources
+
+[Original Project Link](https://frontend.turing.io/projects/module-3/stretch.html)
+
+Mentor mentions and why or other help outside the group
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/relyt4me/stretch-project.svg?style=flat-square
+[contributors-url]: https://github.com/relyt4me/stretch-project/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/relyt4me/stretch-project.svg?style=flat-square
+[forks-url]: https://github.com/relyt4me/stretch-project/network/members
+[stars-shield]: https://img.shields.io/github/stars/relyt4me/stretch-project.svg?style=flat-square
+[stars-url]: https://github.com/relyt4me/stretch-project/stargazers
+[issues-shield]: https://img.shields.io/github/issues/relyt4me/stretch-project.svg?style=flat-square
+[issues-url]: https://github.com/relyt4me/stretch-project/issues
