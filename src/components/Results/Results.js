@@ -5,7 +5,12 @@ import results from './testdata'
 
 const Results = () => {
   const resultsList = results.map(result => {
-    return <DrinkCard />
+    return <DrinkCard 
+      id={result.idDrink}
+      name={result.strDrink}
+      image={result.strDrinkThumb}
+      alcoholContent={result.strAlcoholic}
+    />
   })
 
   return (
