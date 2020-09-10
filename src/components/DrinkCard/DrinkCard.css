@@ -1,23 +1,30 @@
 .DrinkCard {
   border: 1px solid gray;
   border-radius: 3%;  
-  box-shadow: 0.5em 0.5em 0.5em #F65C78;
+  box-shadow: 0.3em 0.3em 1.2em #F65C78;
   background-color: white; 
 }
 
 .cocktail-img {
-  height: 40vh; 
+  height: 27vh; 
   background-size: cover; 
   border-radius: 3% 3% 0 0; 
 }
 
 .alcohol-tag {
   margin-top: 0.5em; 
-  background-color: #C3F584;
   padding: 0.3em; 
   float: right; 
   border-radius: 1em 0 0 1em;
   border: 1px solid grey;
+}
+
+.alcoholic {
+  background-color: #C3F584;
+}
+
+.non-alcoholic {
+  background-color: #FFD271; 
 }
 
 .alcohol-info {
@@ -25,7 +32,7 @@
 }
 
 .cocktail-name {
-
+  text-align: center;
 }
 
 /* COMMENT OUT */

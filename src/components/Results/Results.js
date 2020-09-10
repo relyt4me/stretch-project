@@ -24,7 +24,7 @@ const Results = () => {
           resultsList
         }
         {resultsList.length === 0 &&
-          <p>Sorry, we couldn't find any cocktails that match your search.</p>
+          <p className='no-results'>Sorry, we couldn't find any cocktails that match your search.</p>
         }
       </section>
     </>

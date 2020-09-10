@@ -4,8 +4,13 @@
 }
 
 .Results {
-  margin: 4em; 
+  margin: 3em 4em; 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
   grid-gap: 3em; 
+}
+
+.no-results {
+  color: white; 
+  text-align: center; 
 }
