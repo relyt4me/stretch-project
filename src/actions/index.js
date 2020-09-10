@@ -11,3 +11,10 @@ export const getAlcoholicDrinks = (alcoholicDrinks) => {
     alcoholicDrinks
   }
 }
+
+export const getNonAlcoholicDrinks = (nonAlcoholicDrinks) => {
+  return {
+    type: 'GET_NON_ALCOHOLIC_DRINKS',
+    nonAlcoholicDrinks
+  }
+}
