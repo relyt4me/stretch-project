@@ -24,3 +24,36 @@
   font-family: Automani;
   font-weight: lighter;
 }
+
+@media screen and (max-width: 1540px) {
+  .header-component {
+    grid-template-columns: 1fr 1fr;
+  }
+  .logo {
+    grid-column: 2/3;
+  }
+  .header-title {
+    grid-column: 1/2;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .header-component {
+    grid-template-columns: auto;
+    height: 15vh;
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .header-component {
+    grid-template-columns: 2fr 1fr;
+  }
+  .header-title {
+    font-size: 1.8em;
+    padding-left: 3vw;
+  }
+  .logo {
+    height: 8vh;
+  }
+}
