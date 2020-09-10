@@ -1,3 +1,7 @@
+.search-component * {
+  margin: auto;
+}
+
 .search-component {
   background-color: rgba(0, 0, 0, 0.2);
   display: grid;
