@@ -5,6 +5,11 @@
   background-color: white; 
 }
 
+.DrinkCard:hover {
+  transform: scale(1.05);
+  cursor: pointer; 
+}
+
 .cocktail-img {
   height: 27vh; 
   background-size: cover; 
