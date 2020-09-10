@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: (url, type) => dispatch(collectDrinkData(url, type))
+    fetchData: (type) => dispatch(collectDrinkData(type))
   }
 }
 

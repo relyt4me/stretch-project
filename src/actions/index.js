@@ -31,6 +31,15 @@ export const collectDrinkData = (type) => {
           dispatch(createNonAlcoholicDrinks(drinks.drinks))
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        dispatch(createError('We\'re sorry, our bar is closed!'))
+      })
+  }
+}
+
+export const createError = (error) => {
+  return {
+    type: 'ERRORED',
+    error 
   }
 }

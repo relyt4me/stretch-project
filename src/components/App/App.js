@@ -12,8 +12,8 @@ import { Route } from 'react-router-dom';
 class App extends Component {
 
   componentDidMount() {
-    this.props.fetchData(alcoholic);
-    this.props.fetchData(nonAlcoholic)
+    this.props.fetchData('Alcoholic');
+    this.props.fetchData('Non_Alcoholic')
     //fetch call here
   }
 
