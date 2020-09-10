@@ -1,4 +1,4 @@
-#results-heading {
+.results-heading {
   text-align: center; 
   color: white; 
 }
@@ -8,9 +8,4 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
   grid-gap: 3em; 
-}
-
-.no-results {
-  color: white; 
-  text-align: center; 
 }

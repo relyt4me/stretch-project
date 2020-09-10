@@ -18,15 +18,19 @@ const Results = () => {
 
   return (
     <>
-      <h2 id='results-heading'>Your Cocktail Results</h2>
+      {resultsList.length === 0 &&
+        <p className='results-heading'>Sorry, we couldn't find any cocktails that match your search.</p>
+      }
+      {resultsList.length > 0 &&
+      <>
+      <h2 className='results-heading'>Your Cocktail Results</h2>
       <section className='Results'>
         {resultsList.length > 0 &&
           resultsList
         }
-        {resultsList.length === 0 &&
-          <p className='no-results'>Sorry, we couldn't find any cocktails that match your search.</p>
-        }
       </section>
+      </>
+      }
     </>
   )
 }
