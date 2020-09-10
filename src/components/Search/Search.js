@@ -10,6 +10,10 @@ class Search extends Component {
     };
   }
 
+  handleChange = (event) => {
+    this.setState({ searchPhrase: event.target.value });
+  };
+
   render() {
     return (
       <form className='search-component'>
@@ -17,7 +21,7 @@ class Search extends Component {
           <label htmlFor='searchPhrase' className='searchPhrase'>
             What do you have?
           </label>
-          <input id='searchPhrase' className='searchPhrase-input' type='text' placeholder='Vodka' />
+          <input id='searchPhrase' className='searchPhrase-input' type='text' placeholder='Vodka' onChange={this.handleChange} />
         </div>
         <div className='search-preference-wrapper'>
           <span id='rg-label'>Preference</span>
@@ -30,7 +34,7 @@ class Search extends Component {
             <label for='non-alcoholic'>Non Alcoholic</label>
           </div>
         </div>
-        {this.state.error && <label className='invalid-alert hide'>{this.state.error}</label>}
+        {this.state.error && <label className='invalid-search'>{this.state.error}</label>}
         <div className='search-buttons-wrapper'>
           <button className='search' aria-label='Submit'>
             Find Drinks
