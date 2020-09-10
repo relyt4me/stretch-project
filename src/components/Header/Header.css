@@ -8,6 +8,10 @@
 .logo {
   height: 12vh;
   grid-column: 3/4;
+  border-radius: 45%;
+}
+.logo:hover {
+  box-shadow: 0px 0px 15px 3px #ffffff;
 }
 
 .header-title {
