@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 //will need to format ingredients & their amounts into arrays after data has been retrieved and before data has been added to state
 
-const DrinkRecipe = (drinkData) => {
+const DrinkRecipe = ({ drinkData }) => {
   let instructions = drinkData[0].strInstructions.split('. ');
   return (
     <section className='drink-recipe'>
