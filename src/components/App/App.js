@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Results from '../Results/Results';
 import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
-import drinkData from './DrinkRecipe/drinkData.js';
+import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
 
 //change /drinkRecipe to /:drinkId when we start importing data from api
