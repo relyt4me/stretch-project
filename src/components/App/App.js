@@ -6,6 +6,9 @@ import Search from '../Search/Search';
 import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
 import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { collectDrinkData } from '../../actions'
+// import '../../containers/appContainer'
 
 //change /drinkRecipe to /:drinkId when we start importing data from api
 
@@ -36,6 +39,13 @@ class App extends Component {
     );
   }
 }
-  
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: (type) => dispatch(collectDrinkData(type))
+  }
+}
+
+// export default App;
+export default connect(null, mapDispatchToProps)(App);
+
