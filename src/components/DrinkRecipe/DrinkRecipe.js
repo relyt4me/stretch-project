@@ -1,16 +1,16 @@
 import React from 'react';
-import drinkData from './drinkData.js'
+//import drinkData from './drinkData.js'
 import propTypes from 'prop-types';
 import './DrinkRecipe.css';
 import { Link } from 'react-router-dom';
 
 //will need to format ingredients & their amounts into arrays after data has been retrieved and before data has been added to state
 
-const DrinkRecipe = () => {
+const DrinkRecipe = (drinkData) => {
   let instructions = drinkData[0].strInstructions.split('. ');
   return (
     <section className='drink-recipe'>
-      <Link to={'/'}>Back</Link>
+      <Link exact to='/'>Back</Link>
       <img src={drinkData[0].strDrinkThumb} className='drink-image' alt='image of drink'/>
       <article className='drink-info'>
         <div className='drink-title'>
