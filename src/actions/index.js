@@ -1,3 +1,5 @@
+import { fetchDrinks } from '../helpers/apiCalls'
+
 export const updateDrinksList = (drinksList) => {
   return {
     type: 'ADD_DRINKS_LIST',
@@ -5,16 +7,30 @@ export const updateDrinksList = (drinksList) => {
   }
 }
 
-export const getAlcoholicDrinks = (alcoholicDrinks) => {
+export const createAlcoholicDrinks = (alcoholicDrinks) => {
   return {
-    type: 'GET_ALCOHOLIC_DRINKS',
+    type: 'CREATE_ALCOHOLIC_DRINKS',
     alcoholicDrinks
   }
 }
 
-export const getNonAlcoholicDrinks = (nonAlcoholicDrinks) => {
+export const createNonAlcoholicDrinks = (nonAlcoholicDrinks) => {
   return {
-    type: 'GET_NON_ALCOHOLIC_DRINKS',
+    type: 'CREATE_NON_ALCOHOLIC_DRINKS',
     nonAlcoholicDrinks
+  }
+}
+
+export const collectDrinkData = (type) => {
+  return (dispatch) => {
+    fetchDrinks(type)
+      .then(drinks => {
+        if (type === 'Alcoholic') {
+          dispatch(createAlcoholicDrinks(drinks.drinks))
+        } else {
+          dispatch(createNonAlcoholicDrinks(drinks.drinks))
+        }
+      })
+      .catch(error => console.log(error))
   }
 }

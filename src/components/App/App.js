@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component} from 'react';
 import Results from '../Results/Results';
 import './App.css';
 import Header from '../Header/Header';
@@ -9,23 +9,33 @@ import { Route } from 'react-router-dom';
 
 //change /drinkRecipe to /:drinkId when we start importing data from api
 
-function App() {
-  return (
-    <div className='App'>
-      <Header />
-      <Route exact path='/drinkRecipe' render={() => <DrinkRecipe drinkData={drinkData} />} />
-      <Route
-        exact
-        path='/'
-        render={() => (
-          <>
-            <Search />
-            <Results />
-          </>
-        )}
-      />
-    </div>
-  );
+class App extends Component {
+
+  componentDidMount() {
+    this.props.fetchData(alcoholic);
+    this.props.fetchData(nonAlcoholic)
+    //fetch call here
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <Header />
+        <Route exact path='/drinkRecipe' render={() => <DrinkRecipe drinkData={drinkData} />} />
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <>
+              <Search />
+              <Results />
+            </>
+          )}
+        />
+      </div>
+    );
+  }
 }
+  
 
 export default App;
