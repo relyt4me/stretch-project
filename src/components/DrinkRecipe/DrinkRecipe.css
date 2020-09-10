@@ -5,6 +5,7 @@
   grid-template-columns: 1fr 2fr;
   grid-gap: 5vw;
   margin: 5vw;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .drink-image {
@@ -15,13 +16,13 @@
 
 .drink-info {
   grid-column: 2;
-  color: #F65C78;
+  color: #c3f584;
 }
 
 .drink-name {
   margin: 0;
   font-family: Automani;
-  font-size: 6vh
+  font-size: 6vh;
 }
 
 .drink-title,
