@@ -5,6 +5,7 @@ import results from './testdata'
 
 const Results = () => {
   const resultsList = results.map(result => {
+    //wrap each card below in a link
     return (
       <DrinkCard 
         key={result.idDrink}
@@ -24,6 +25,7 @@ const Results = () => {
       {resultsList.length > 0 &&
       <>
       <h2 className='results-heading'>Your Cocktail Results</h2>
+      {/* /May need onClick handler for results section to analyze the drink selected if need to update props accordingly */}
       <section className='Results' aria-label='cocktail results'>
         {resultsList.length > 0 &&
           resultsList
