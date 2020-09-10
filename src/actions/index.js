@@ -4,3 +4,10 @@ export const updateDrinksList = (drinksList) => {
     drinksList
   }
 }
+
+export const getAlcoholicDrinks = (alcoholicDrinks) => {
+  return {
+    type: 'GET_ALCOHOLIC_DRINKS',
+    alcoholicDrinks
+  }
+}
