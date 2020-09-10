@@ -4,7 +4,6 @@ import './Results.css'
 import results from './testdata'
 
 const Results = () => {
-  console.log(results)
   const resultsList = results.map(result => {
     return (
       <DrinkCard 
@@ -18,7 +17,9 @@ const Results = () => {
   })
 
   return (
-      <section>
+    <>
+      <h2 id='results-heading'>Your Cocktail Results</h2>
+      <section className='Results'>
         {resultsList.length > 0 &&
           resultsList
         }
@@ -26,6 +27,7 @@ const Results = () => {
           <p>Sorry, we couldn't find any cocktails that match your search.</p>
         }
       </section>
+    </>
   )
 }
 

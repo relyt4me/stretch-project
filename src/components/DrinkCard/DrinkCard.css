@@ -1,0 +1,34 @@
+.DrinkCard {
+  border: 1px solid gray;
+  border-radius: 3%;  
+  box-shadow: 0.5em 0.5em 0.5em #F65C78;
+  background-color: white; 
+}
+
+.cocktail-img {
+  height: 40vh; 
+  background-size: cover; 
+  border-radius: 3% 3% 0 0; 
+}
+
+.alcohol-tag {
+  margin-top: 0.5em; 
+  background-color: #C3F584;
+  padding: 0.3em; 
+  float: right; 
+  border-radius: 1em 0 0 1em;
+  border: 1px solid grey;
+}
+
+.alcohol-info {
+  margin: 0; 
+}
+
+.cocktail-name {
+
+}
+
+/* COMMENT OUT */
+body {
+  background-color: black; 
+}
