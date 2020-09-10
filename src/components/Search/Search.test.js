@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Search from './Search';
 
 describe('Search', () => {
@@ -58,7 +59,15 @@ describe('Search', () => {
     expect(preferenceNonAlcoholic).toBeChecked();
   });
 
-  it('Should fire the searchClick method on click of search button', () => {});
+  it('Should fire the searchClick method on click of search button', () => {
+    // render(<Search />);
+    // const findButton = screen.getByRole('button', { name: 'Find' });
+    // fireEvent.click(findButton);
+  });
 
-  it('Should fire the searchClick method on click of search button', () => {});
+  it('Should fire the searchClick method on click of search button', () => {
+    // render(<Search />);
+    // const randomButton = screen.getByRole('button', { name: 'Random' });
+    // fireEvent.click(randomButton);
+  });
 });
