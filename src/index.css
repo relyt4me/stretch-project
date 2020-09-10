@@ -1,6 +1,6 @@
 @font-face {
   font-family: Beon;
-  src: url('./Beon.otf');
+  src: url('./beon.medium.ttf');
 }
 
 @font-face {
@@ -20,6 +20,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
