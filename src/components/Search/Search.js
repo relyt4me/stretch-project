@@ -21,6 +21,10 @@ class Search extends Component {
 
   randomClick = (event) => {
     event.preventDefault();
+    //make api fetch calls to get the list of drinks with that ingredient
+    //`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${this.state.searchPhrase}`
+    //then if preference was not 'both', filter list so that only drinks with ids included in that alcoholic/nonAlcoholic list passed down from props (whatever preference was selected) are included in final drinksList
+    //then that drinksList should be dispatched to the store (handleSearch fn passing in drinksList)
   };
 
   render() {
