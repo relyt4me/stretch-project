@@ -1,0 +1,31 @@
+.drink-recipe {
+  width: 80vw;
+  background-color: rose;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 5vw;
+  margin: 5vw;
+}
+
+.drink-image {
+  grid-column: 1;
+  width: 40vw;
+  border-radius: 6px;
+}
+
+.drink-info {
+  grid-column: 2;
+  color: #F65C78;
+}
+
+.drink-name {
+  margin: 0;
+  font-family: Automani;
+  font-size: 6vh
+}
+
+.drink-title,
+.ingredients-title,
+.instructions-title {
+  text-align: center;
+}
