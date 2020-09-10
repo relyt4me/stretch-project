@@ -1,7 +1,6 @@
 import React from 'react';
 import Results from '../Results/Results'
 import './App.css';
-import Results from '../Results/Results';
 import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
 import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
