@@ -24,7 +24,7 @@ const Results = () => {
       {resultsList.length > 0 &&
       <>
       <h2 className='results-heading'>Your Cocktail Results</h2>
-      <section className='Results'>
+      <section className='Results' aria-label='cocktail results'>
         {resultsList.length > 0 &&
           resultsList
         }
