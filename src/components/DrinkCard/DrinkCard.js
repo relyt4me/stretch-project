@@ -4,7 +4,7 @@ import './DrinkCard.css'
 const DrinkCard = ({id, name, image, alcoholContent}) => {
   return (
     <section className='DrinkCard'>
-      <section className='cocktail-img' style={{ backgroundImage: `url(${image})` }} alt={name} id={id}>
+      <section className='cocktail-img' style={{ backgroundImage: `url(${image})` }} title={name} id={id}>
         {alcoholContent === 'Alcoholic' &&
           <section className='alcohol-tag alcoholic'>
             <p className='alcohol-info'>{alcoholContent}</p>
