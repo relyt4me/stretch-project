@@ -5,10 +5,10 @@ import nonAlcoholicDrinksReducer from './nonAlcholicDrinks-reducer'
 import errorReducer from './error-reducer'
 
 const rootReducer = combineReducers({
-  drinksListReducer,
-  nonAlcoholicDrinksReducer,
-  alcoholicDrinksReducer,
-  errorReducer
+  drinksList: drinksListReducer,
+  nonAlcholicDrinks: nonAlcoholicDrinksReducer,
+  alcoholicDrinks: alcoholicDrinksReducer,
+  errorMessage: errorReducer
 })
 
-export default rootReducer 
+export default rootReducer
