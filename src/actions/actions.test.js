@@ -35,4 +35,39 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
+  it('should have a type of CREATE_ALCOHOLIC_DRINKS', () => {
+    const alcoholicDrinks = [
+      {
+        strDrink: 'Toms Margarita',
+        strDrinkThumb: "https://margarita-img.com",
+        idDrink: '1'
+      },
+      {
+        strDrink: 'G & T',
+        strDrinkThumb: "https://g-and-t-img.com",
+        idDrink: '2'
+      }
+    ];
+    const expectedAction = {
+      type: 'CREATE_ALCOHOLIC_DRINKS',
+      alcoholicDrinks: [
+        {
+          strDrink: 'Toms Margarita',
+          strDrinkThumb: "https://margarita-img.com",
+          idDrink: '1'
+        },
+        {
+          strDrink: 'G & T',
+          strDrinkThumb: "https://g-and-t-img.com",
+          idDrink: '2'
+        }
+      ]
+    }
+
+    const result = actions.createAlcoholicDrinks(alcoholicDrinks);
+
+    expect(result).toEqual(expectedAction);
+  });
+
   
+})
