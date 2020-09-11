@@ -7,8 +7,8 @@ import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
 import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { collectDrinkData } from '../../actions'
-// import '../../containers/appContainer'
+import { fetchDrinks } from '../../helpers/apiCalls'
+import { createAlcoholicDrinks, createNonAlcoholicDrinks, createError } from '../../actions'
 
 //change /drinkRecipe to /:drinkId when we start importing data from api
 
@@ -17,7 +17,6 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchData('Alcoholic');
     this.props.fetchData('Non_Alcoholic')
-    //fetch call here
   }
 
   render() {
@@ -46,6 +45,21 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default App;
+const collectDrinkData = (type) => {
+  return (dispatch) => {
+    fetchDrinks(type)
+      .then(drinks => {
+        if (type === 'Alcoholic') {
+          dispatch(createAlcoholicDrinks(drinks.drinks))
+        } else {
+          dispatch(createNonAlcoholicDrinks(drinks.drinks))
+        }
+      })
+      .catch(error => {
+        dispatch(createError('We\'re sorry, our bar is closed!'))
+      })
+  }
+}
+
 export default connect(null, mapDispatchToProps)(App);
 
