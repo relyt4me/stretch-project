@@ -103,5 +103,16 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
-  
+  it('should have a type of ERRORED', () => {
+    const error = 'Oops, that didn\'t work!'
+
+    const expectedAction = {
+      type: 'ERRORED',
+      error: 'Oops, that didn\'t work!'
+    }
+
+    const result = actions.createError(error);
+
+    expect(result).toEqual(expectedAction);
+  });
 })
