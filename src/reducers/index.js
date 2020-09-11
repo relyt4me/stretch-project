@@ -1,14 +1,14 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import drinksListReducer from './drinksList-reducer';
-import alcoholicDrinksReducer from './alcoholicDrinks-reducer'
-import nonAlcoholicDrinksReducer from './nonAlcoholicDrinks-reducer'
-import errorReducer from './error-reducer'
+import alcoholicDrinksReducer from './alcoholicDrinks-reducer';
+import nonAlcoholicDrinksReducer from './nonAlcoholicDrinks-reducer';
+import errorReducer from './error-reducer';
 
 const rootReducer = combineReducers({
   drinksList: drinksListReducer,
-  nonAlcholicDrinks: nonAlcoholicDrinksReducer,
+  nonAlcoholicDrinks: nonAlcoholicDrinksReducer,
   alcoholicDrinks: alcoholicDrinksReducer,
-  errorMessage: errorReducer
-})
+  errorMessage: errorReducer,
+});
 
-export default rootReducer
+export default rootReducer;
