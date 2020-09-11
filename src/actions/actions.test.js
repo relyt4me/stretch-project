@@ -69,5 +69,39 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
+  it('should have a type of CREATE_NON_ALCOHOLIC_DRINKS', () => {
+    const nonAlcoholicDrinks = [
+      {
+        strDrink: 'Virgin Margarita',
+        strDrinkThumb: "https://virgin-margarita-img.com",
+        idDrink: '10'
+      },
+      {
+        strDrink: 'Pina colada',
+        strDrinkThumb: "https://pina-colada.com",
+        idDrink: '11'
+      }
+    ];
+    const expectedAction = {
+      type: 'CREATE_NON_ALCOHOLIC_DRINKS',
+      nonAlcoholicDrinks: [
+        {
+          strDrink: 'Virgin Margarita',
+          strDrinkThumb: "https://virgin-margarita-img.com",
+          idDrink: '10'
+        },
+        {
+          strDrink: 'Pina colada',
+          strDrinkThumb: "https://pina-colada.com",
+          idDrink: '11'
+        }
+      ]
+    }
+
+    const result = actions.createNonAlcoholicDrinks(nonAlcoholicDrinks);
+
+    expect(result).toEqual(expectedAction);
+  });
+
   
 })
