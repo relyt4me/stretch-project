@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Search.css';
 import { connect } from 'react-redux';
-import { updateDrinksList } from '../actions';
+import { updateDrinksList, createError } from '../../actions';
+import { fetchDrinkByIngredient } from '../../helpers/apiCalls';
 
 class Search extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class Search extends Component {
     this.state = {
       searchPhrase: '',
       preference: '',
-      error: '',
     };
   }
 
@@ -22,17 +22,37 @@ class Search extends Component {
   };
 
   searchClick = (event) => {
+    const { searchPhrase, preference } = this.state;
     event.preventDefault();
-    // make sure the search inputs are valid
-    // call a helper fetch for the search
-    // catch error and send a dispatch to error if get
-    // filter this search with out drink choice(conditional)
-    // dispatch to change the drinkList
+    if (searchPhrase && preference) {
+      fetchDrinkByIngredient(searchPhrase)
+        .then((drinks) => {
+          if (preference !== 'both') {
+            const drinksList = this.filterDrinksByPreference(drinks.drinks, preference);
+            console.log(drinksList);
+            this.props.handleSearch(drinksList);
+          } else {
+            this.props.handleSearch(drinks.drinks);
+          }
+        })
+        .catch((error) => {
+          this.props.handleError("We're sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.");
+        });
+    }
+  };
 
-    //make api fetch calls to get the list of drinks with that ingredient
-    //`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${this.state.searchPhrase}`
-    //then if preference was not 'both', filter list so that only drinks with ids included in that alcoholic/nonAlcoholic list passed down from props (whatever preference was selected) are included in final drinksList
-    //then that drinksList should be dispatched to the store (handleSearch fn passing in drinksList)
+  filterDrinksByPreference = (drinks, preference) => {
+    let filterList;
+    if (preference === 'alcoholic') {
+      filterList = this.props.alcoholicDrinks;
+    } else if (preference === 'non-alcoholic') {
+      filterList = this.props.nonAlcoholicDrinks;
+    }
+    return drinks.filter((drink) => {
+      return filterList.find((filterDrink) => {
+        return filterDrink.idDrink === drink.idDrink;
+      });
+    });
   };
 
   randomClick = (event) => {
@@ -66,7 +86,6 @@ class Search extends Component {
             </label>
           </div>
         </div>
-        {this.state.error && <label className='invalid-search'>{this.state.error}</label>}
         <div className='search-buttons-wrapper'>
           <button className='search' aria-label='Find' onClick={this.searchClick}>
             Find Drinks
@@ -88,6 +107,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleSearch: (drinksList) => {
       dispatch(updateDrinksList(drinksList));
+    },
+    handleError: (error) => {
+      dispatch(createError(error));
     },
   };
 };
