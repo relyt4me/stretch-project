@@ -29,7 +29,7 @@ class Search extends Component {
         .then((drinks) => {
           if (preference !== 'both') {
             const drinksList = this.filterDrinksByPreference(drinks.drinks, preference);
-            console.log(drinksList);
+
             this.props.handleSearch(drinksList);
           } else {
             this.props.handleSearch(drinks.drinks);
