@@ -1,18 +1,19 @@
 import React from 'react';
 import DrinkCard from '../DrinkCard/DrinkCard';
-import './Results.css'
-import results from './testdata'
+import './Results.css';
+import { connect } from 'react-redux';
+// import results from './testdata'
 
-const Results = () => {
-  const resultsList = results.map(result => {
+const Results = (props) => {
+  const resultsList = props.drinksList.map(drink => {
     //wrap each card below in a link
     return (
-      <DrinkCard 
-        key={result.idDrink}
-        id={result.idDrink}
-        name={result.strDrink}
-        image={result.strDrinkThumb}
-        alcoholContent={result.strAlcoholic}
+      <DrinkCard
+        key={drink.idDrink}
+        id={drink.idDrink}
+        name={drink.strDrink}
+        image={drink.strDrinkThumb}
+        alcoholContent={drink.strAlcoholic}
       />
     )
   })
@@ -37,4 +38,14 @@ const Results = () => {
   )
 }
 
-export default Results
+const mapStateToProps = (state) => {
+  return {
+    drinksList: state.drinksList
+  }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//
+// }
+
+export default connect(mapStateToProps, null)(Results);
