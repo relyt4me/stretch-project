@@ -40,7 +40,7 @@ const Results = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    drinksList: state.drinksListReducer
+    drinksList: state.drinksList
   }
 }
 
