@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Search.css';
+import { connect } from 'react-redux';
+import { updateDrinksList } from '../actions';
 
 class Search extends Component {
   constructor(props) {
@@ -71,4 +73,16 @@ class Search extends Component {
   }
 }
 
-export default Search;
+const mapStateToProps = (state) => {
+  return { alcoholicDrinks: state.alcoholicDrinks, nonAlcoholicDrinks: state.nonAlcoholicDrinks };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSearch: (drinksList) => {
+      dispatch(updateDrinksList(drinksList));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
