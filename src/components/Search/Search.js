@@ -57,7 +57,8 @@ class Search extends Component {
 
   randomClick = (event) => {
     event.preventDefault();
-    //
+    //fetch random drink
+    //redirect to drink recipe page
   };
 
   render() {

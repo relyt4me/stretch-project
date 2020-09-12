@@ -26,7 +26,6 @@ class App extends Component {
           const drinkId = match.params.id; 
           this.props.collectId(drinkId)
           return <DrinkRecipe />}} />
-
         <Route
           exact
           path='/'
