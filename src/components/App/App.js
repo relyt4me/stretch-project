@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Header />
-        <Route exact path='/drinkRecipe' render={() => <DrinkRecipe drinkData={drinkData} />} />
+        <Route exact path='/recipe/:drink-name' render={() => <DrinkRecipe drinkData={drinkData} />} />
         <Route
           exact
           path='/'
