@@ -8,7 +8,7 @@ import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchDrinks } from '../../helpers/apiCalls';
-import { createAlcoholicDrinks, createNonAlcoholicDrinks, createError } from '../../actions';
+import { createAlcoholicDrinks, createNonAlcoholicDrinks, createError, addRecipeId } from '../../actions';
 
 //change /drinkRecipe to /:drinkId when we start importing data from api
 
@@ -22,7 +22,10 @@ class App extends Component {
     return (
       <div className='App'>
         <Header />
-        <Route exact path='/recipe/:drinkname' render={() => <DrinkRecipe />} />
+        <Route exact path='/recipe/:id/:drinkname' render={({match}) => {
+          const drinkId = match.params.id; 
+          this.props.collectId(drinkId)
+          return <DrinkRecipe />}} />
 
         <Route
           exact
@@ -42,6 +45,7 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: (type) => dispatch(collectDrinkData(type)),
+    collectId: (id) => dispatch(addRecipeId(id)),
   };
 };
 
