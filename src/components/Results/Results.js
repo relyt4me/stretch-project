@@ -3,8 +3,10 @@ import DrinkCard from '../DrinkCard/DrinkCard';
 import './Results.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types'
 
 const Results = (props) => {
+  console.log(props)
   let resultsList = []
   if (props.drinksList.length > 0) {
     resultsList = props.drinksList.map(drink => {
@@ -49,6 +51,12 @@ const mapStateToProps = (state) => {
     alcoholicDrinks: state.alcoholicDrinks, 
     nonAlcoholicDrinks: state.nonAlcoholicDrinks 
   }
+}
+
+Results.propTypes = {
+  alcoholicDrinks: propTypes.array, 
+  drinksList: propTypes.array,
+  nonAlcoholicDrinks: propTypes.array
 }
 
 export default connect(mapStateToProps, null)(Results);
