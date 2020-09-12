@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import drinkData from './drinkData.js'
 import propTypes from 'prop-types';
 import './DrinkRecipe.css';
 import { Link } from 'react-router-dom';
@@ -8,22 +7,35 @@ import { createDrinkRecipe, createError } from '../../actions';
 import { fetchDrinkRecipe } from '../../helpers/apiCalls';
 
 class DrinkRecipe extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      drinkId: this.props.drinkId,
-      ready: false
-    }
-  }
+
   componentDidMount() {
-    this.props.fetchRecipe(this.state.drinkId)
-    this.setState({ready: true})
+    this.props.fetchRecipe(this.props.drinkId)
+  }
+
+  displayRecipe(recipe) {
+    return recipe.ingredients.filter(ingredient => {
+        if(ingredient != null) {
+          return ingredient;
+        }
+      }).map((ingredient, index) => {
+        return (
+          <li>{recipe.ingredientAmounts[index]}{ingredient}</li>
+        )
+      })
+  }
+
+  displayInstructions(instructions) {
+    return instructions.map(instruction => {
+      return (
+        <li>{instruction}</li>
+      )
+    })
   }
 
   render() {
     const { recipe } = this.props;
-    console.log('recipe ', recipe);
-    if (this.state.ready) {
+
+    if (recipe['instructions']) {
       let instructions = recipe.instructions.split('. ');
       return (
         <section className='drink-recipe'>
@@ -38,29 +50,13 @@ class DrinkRecipe extends Component {
             <div className='ingredients'>
               <h2 className='ingredients-title'>Ingredients</h2>
               <ul>
-                {
-                  recipe.ingredients.filter(ingredient => {
-                    if(ingredient != null) {
-                      return ingredient;
-                    }
-                  }).map((ingredient, index) => {
-                    return (
-                      <li>{recipe.ingredientAmounts[index]}{ingredient}</li>
-                    )
-                  })
-                }
+                {this.displayRecipe(recipe)}
             </ul>
             </div>
             <div className='instructions'>
               <h2 className='instructions-title'>Instructions</h2>
               <ol>
-                {
-                  instructions.map(instruction => {
-                    return (
-                      <li>{instruction}</li>
-                    )
-                  })
-                }
+                {this.displayInstructions(instructions)}
               </ol>
             </div>
           </article>
@@ -78,19 +74,20 @@ class DrinkRecipe extends Component {
 const mapStateToProps = (state) => {
   return {
     drinkId: state.drinkId,
-    recipe: state.drinkRecipe
+    recipe: state.drinkRecipe,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRecipe: (id) => dispatch(collectRecipe(id)),
+    fetchRecipe: (id) => dispatch(collectRecipe(id))
   };
 };
 
 const collectRecipe = (id) => {
   console.log("fetch ", id);
   return (dispatch) => {
+
     fetchDrinkRecipe(id)
       .then((recipe) => {
         const newRecipe = fixRecipeData(recipe.drinks[0]);
