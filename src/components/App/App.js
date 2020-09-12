@@ -4,7 +4,7 @@ import './App.css';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
 import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
-import drinkData from '../DrinkRecipe/drinkData.js';
+// import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchDrinks } from '../../helpers/apiCalls';
@@ -22,7 +22,8 @@ class App extends Component {
     return (
       <div className='App'>
         <Header />
-        <Route exact path='/drinkRecipe' render={() => <DrinkRecipe drinkData={drinkData} />} />
+        <Route exact path='/recipe/:drinkname' render={() => <DrinkRecipe />} />
+
         <Route
           exact
           path='/'
