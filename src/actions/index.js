@@ -19,9 +19,23 @@ export const createNonAlcoholicDrinks = (nonAlcoholicDrinks) => {
   }
 }
 
+export const addRecipeId = (recipeId) => {
+  return {
+    type: 'ADD_RECIPE_ID',
+    recipeId
+  }
+}
+
+export const createDrinkRecipe = (drinkRecipe) => {
+  return {
+    type: 'CREATE_DRINK_RECIPE',
+    drinkRecipe
+  }
+}
+
 export const createError = (error) => {
   return {
     type: 'ERRORED',
-    error 
+    error
   }
 }
