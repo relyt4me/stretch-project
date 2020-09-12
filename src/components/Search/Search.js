@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Search.css';
 import { connect } from 'react-redux';
 import { updateDrinksList, createError } from '../../actions';
-import { fetchDrinkByIngredient } from '../../helpers/apiCalls';
+import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
+import { Redirect } from 'react-router-dom'
 
 class Search extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Search extends Component {
     this.state = {
       searchPhrase: '',
       preference: '',
+      randomDrink: null
     };
   }
 
@@ -29,7 +31,6 @@ class Search extends Component {
         .then((drinks) => {
           if (preference !== 'both') {
             const drinksList = this.filterDrinksByPreference(drinks.drinks, preference);
-
             this.props.handleSearch(drinksList);
           } else {
             this.props.handleSearch(drinks.drinks);
@@ -57,10 +58,19 @@ class Search extends Component {
 
   randomClick = (event) => {
     event.preventDefault();
-    //
+    fetchRandomDrink()
+      .then(drink => {
+        this.setState({ randomDrink: drink.drinks[0] });
+      })
+      .catch(error => {
+        this.props.handleError('Our bartender is out. Please try again later.')
+      })
   };
 
   render() {
+    if (this.state.randomDrink) {
+      return <Redirect to={`/recipe/${this.state.randomDrink.idDrink}/${this.state.randomDrink.strDrink}`} />
+    }
     return (
       <form className='search-component'>
         <div className='search-label-wrapper'>

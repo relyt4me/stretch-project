@@ -3,13 +3,12 @@ import DrinkCard from '../DrinkCard/DrinkCard';
 import './Results.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addRecipeId } from '../../actions';
+// import { addRecipeId } from '../../actions';
 
 const Results = (props) => {
   const resultsList = props.drinksList.map(drink => {
     return (
-      <Link onClick={() => props.collectId(drink.idDrink)}
-      exact to={`/recipe/${drink.strDrink}`}>
+      <Link exact to={`/recipe/${drink.idDrink}/${drink.strDrink}`}>
         <DrinkCard
           key={drink.idDrink}
           id={drink.idDrink}
@@ -45,10 +44,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    collectId: (id) => dispatch(addRecipeId(id)),
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     collectId: (id) => dispatch(addRecipeId(id)),
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Results);
+export default connect(mapStateToProps, null)(Results);
