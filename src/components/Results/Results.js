@@ -3,21 +3,26 @@ import DrinkCard from '../DrinkCard/DrinkCard';
 import './Results.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { addRecipeId } from '../../actions';
 
 const Results = (props) => {
-  const resultsList = props.drinksList.map(drink => {
-    return (
-      <Link exact to={`/recipe/${drink.idDrink}/${drink.strDrink}`}>
-        <DrinkCard
-          key={drink.idDrink}
-          id={drink.idDrink}
-          name={drink.strDrink}
-          image={drink.strDrinkThumb}
-        />
-      </Link>
-    )
-  })
+  let resultsList = []
+  if (props.drinksList.length > 0) {
+    resultsList = props.drinksList.map(drink => {
+      const alcoholContent = props.nonAlcoholicDrinks.find(alcDrink => {
+        return alcDrink.idDrink === drink.idDrink
+      });
+      return (
+        <Link to={`/recipe/${drink.idDrink}/${drink.strDrink}`} key={drink.idDrink}>
+          <DrinkCard
+            id={drink.idDrink}
+            name={drink.strDrink}
+            image={drink.strDrinkThumb}
+            alcoholContent={alcoholContent}
+          />
+        </Link>
+      )
+    })
+  } 
 
   return (
     <>
@@ -40,14 +45,10 @@ const Results = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    drinksList: state.drinksList
+    drinksList: state.drinksList, 
+    alcoholicDrinks: state.alcoholicDrinks, 
+    nonAlcoholicDrinks: state.nonAlcoholicDrinks 
   }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     collectId: (id) => dispatch(addRecipeId(id)),
-//   }
-// }
 
 export default connect(mapStateToProps, null)(Results);
