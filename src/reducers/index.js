@@ -5,6 +5,8 @@ import nonAlcoholicDrinksReducer from './nonAlcoholicDrinks-reducer';
 import errorReducer from './error-reducer';
 
 const rootReducer = combineReducers({
+  drinkRecipe: drinkRecipeReducer,
+  drinkId: drinkIdReducer,
   drinksList: drinksListReducer,
   nonAlcoholicDrinks: nonAlcoholicDrinksReducer,
   alcoholicDrinks: alcoholicDrinksReducer,
