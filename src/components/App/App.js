@@ -23,9 +23,14 @@ class App extends Component {
       <div className='App'>
         <Header />
         <Route exact path='/recipe/:id/:drinkname' render={({match}) => {
-          const drinkId = match.params.id; 
+          const drinkId = match.params.id;
           this.props.collectId(drinkId)
-          return <DrinkRecipe />}} />
+          return (
+            <>
+              <Search />
+              <DrinkRecipe />
+            </>
+          )}} />
         <Route
           exact
           path='/'
