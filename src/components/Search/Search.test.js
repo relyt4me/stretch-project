@@ -3,25 +3,18 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from '../../reducers/index';
+// import rootReducer from '../../reducers/index';
 import { Search } from './Search';
 import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
 import '@testing-library/jest-dom';
 jest.mock('../../helpers/apiCalls');
 
 describe.only('Search', () => {
-  let store;
-  beforeEach(() => {
-    store = createStore(rootReducer);
-  });
   it('Should display search form on render', () => {
     render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Search />
-        </MemoryRouter>
-      </Provider>
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
     );
 
     const searchLabel = screen.getByText('What do you have?');
@@ -45,11 +38,9 @@ describe.only('Search', () => {
 
   it('Should change change the input as the form is filled out', () => {
     render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Search />
-        </MemoryRouter>
-      </Provider>
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
     );
 
     const searchBox = screen.getByPlaceholderText('Vodka');
@@ -61,11 +52,9 @@ describe.only('Search', () => {
 
   it('Should check the radio buttons as the form is filled out', () => {
     render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Search />
-        </MemoryRouter>
-      </Provider>
+      <MemoryRouter>
+        <Search />
+      </MemoryRouter>
     );
 
     const preferenceBoth = screen.getByRole('radio', { name: 'Both' });
@@ -108,11 +97,9 @@ describe.only('Search', () => {
     const mockHandleSearch = jest.fn();
 
     render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Search handleSearch={mockHandleSearch} alcoholicDrinks={alcoholicDrinks} />
-        </MemoryRouter>
-      </Provider>
+      <MemoryRouter>
+        <Search handleSearch={mockHandleSearch} alcoholicDrinks={alcoholicDrinks} />
+      </MemoryRouter>
     );
 
     const preferenceAlcoholic = screen.getByRole('radio', { name: 'Alcoholic' });
@@ -141,11 +128,9 @@ describe.only('Search', () => {
     const mockHandleSearch = jest.fn();
 
     render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Search handleSearch={mockHandleSearch} />
-        </MemoryRouter>
-      </Provider>
+      <MemoryRouter>
+        <Search handleSearch={mockHandleSearch} />
+      </MemoryRouter>
     );
 
     const preferenceBoth = screen.getByRole('radio', { name: 'Both' });
@@ -160,10 +145,29 @@ describe.only('Search', () => {
     expect(mockHandleSearch).toBeCalledWith(foundGinDrinks.drinks);
   });
 
-  it('Should call handleError when there is no valid search', () => {
-    // render(<Search />);
-    // const randomButton = screen.getByRole('button', { name: 'Random' });
-    // fireEvent.click(randomButton);
+  it('Should call handleError when there is no valid search', async () => {
+    const foundNothing = null;
+    const alcoholicDrinks = [{ idDrink: '2' }, { idDrink: '3' }, { idDrink: '4' }];
+
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
+    const mockHandleSearch = jest.fn();
+
+    render(
+      <MemoryRouter>
+        <Search handleSearch={mockHandleSearch} alcoholicDrinks={alcoholicDrinks} />
+      </MemoryRouter>
+    );
+
+    const preferenceAlcoholic = screen.getByRole('radio', { name: 'Alcoholic' });
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceAlcoholic);
+    fireEvent.click(findButton);
+
+    await waitFor(() => expect(mockHandleSearch).toBeCalledTimes(1));
+    expect(mockHandleSearch).toBeCalledWith(filteredGinDrinks);
   });
 
   it('Should call handleError when there is a bad response from the server', () => {
