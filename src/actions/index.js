@@ -39,3 +39,10 @@ export const createError = (error) => {
     error
   }
 }
+
+export const resetRecipe = () => {
+  return {
+    type: 'RESET_RECIPE',
+    drinkRecipe: {}
+  }
+}
