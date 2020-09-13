@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import './DrinkRecipe.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createDrinkRecipe, createError, resetRecipe } from '../../actions';
+import { createDrinkRecipe, createError } from '../../actions';
 import { fetchDrinkRecipe } from '../../helpers/apiCalls';
 
 class DrinkRecipe extends Component {
@@ -39,7 +39,7 @@ class DrinkRecipe extends Component {
       let instructions = recipe.instructions.split('. ');
       return (
         <section className='drink-recipe'>
-          <Link exact to='/' onClick={this.props.resetRecipe}>Back</Link>
+          <Link exact to='/'>Back</Link>
           <img src={recipe.picture} className='drink-image' alt='image of drink'/>
           <article className='drink-info'>
             <div className='drink-title'>
@@ -80,8 +80,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRecipe: (id) => dispatch(collectRecipe(id)),
-    resetRecipe: () => dispatch(resetRecipe())
+    fetchRecipe: (id) => dispatch(collectRecipe(id))
   };
 };
 
