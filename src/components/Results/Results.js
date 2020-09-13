@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types'
 
-const Results = (props) => {
+export const Results = (props) => {
   let resultsList = []
   if (props.drinksList.length > 0) {
     resultsList = props.drinksList.map(drink => {
-      const alcoholContent = props.nonAlcoholicDrinks.find(alcDrink => {
-        return alcDrink.idDrink === drink.idDrink
+      const alcoholContent = props.nonAlcoholicDrinks.find(nonAlcDrink => {
+        return nonAlcDrink.idDrink === drink.idDrink
       });
       return (
         <Link to={`/recipe/${drink.idDrink}/${drink.strDrink}`} key={drink.idDrink}>
@@ -44,7 +44,7 @@ const Results = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     drinksList: state.drinksList, 
     alcoholicDrinks: state.alcoholicDrinks, 
