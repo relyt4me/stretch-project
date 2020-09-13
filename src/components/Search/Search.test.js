@@ -89,7 +89,45 @@ describe.only('Search', () => {
   });
 
   it('Should filter the search and call handle Search when inputs are filled out for a alcohol preference', async () => {
-    // Mock the drinks that i get from my fetch drinks by ingredients
+    const foundGinDrinks = {
+      drinks: [
+        { strDrink: 'Drink1NA', idDrink: '1' },
+        { strDrink: 'Drink2A', idDrink: '2' },
+        { strDrink: 'Drink3A', idDrink: '3' },
+        { strDrink: 'Drink4A', idDrink: '4' },
+      ],
+    };
+    const filteredGinDrinks = [
+      { strDrink: 'Drink2A', idDrink: '2' },
+      { strDrink: 'Drink3A', idDrink: '3' },
+      { strDrink: 'Drink4A', idDrink: '4' },
+    ];
+    const alcoholicDrinks = [{ idDrink: '2' }, { idDrink: '3' }, { idDrink: '4' }];
+
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
+    const mockHandleSearch = jest.fn();
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <Search handleSearch={mockHandleSearch} alcoholicDrinks={alcoholicDrinks} />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceAlcoholic = screen.getByRole('radio', { name: 'Alcoholic' });
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceAlcoholic);
+    fireEvent.click(findButton);
+
+    await waitFor(() => expect(mockHandleSearch).toBeCalledTimes(1));
+    expect(mockHandleSearch).toBeCalledWith(filteredGinDrinks);
+  });
+
+  it('Should call handle Search when inputs are filled out without an alcohol preference', async () => {
     const foundGinDrinks = {
       drinks: [
         { strDrink: 'Drink1NA', idDrink: '1' },
@@ -99,53 +137,27 @@ describe.only('Search', () => {
       ],
     };
 
-    // Mock the drinks that i get after they have been filtered that i will use when i pass to my handle search dispatch
-    const filteredGinDrinks = [
-      { strDrink: 'Drink2A', idDrink: '2' },
-      { strDrink: 'Drink3A', idDrink: '3' },
-      { strDrink: 'Drink4A', idDrink: '4' },
-    ];
-
-    // Mock the alcoholic drinks that will be in the store and got with mapstatetoprops
-    //I will give this to search in the render as if passing props
-    const alcoholicDrinks = [{ idDrink: '2' }, { idDrink: '3' }, { idDrink: '4' }];
-
-    // mock the fetch call
     fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
-
-    // create my fake handleSeach to give as a prop to the Search component in render
     const mockHandleSearch = jest.fn();
 
-    //Render
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <Search handleSearch={mockHandleSearch} alcoholicDrinks={alcoholicDrinks} />
+          <Search handleSearch={mockHandleSearch} />
         </MemoryRouter>
       </Provider>
     );
 
-    // Enter search and fire the click
-    const preferenceAlcoholic = screen.getByRole('radio', { name: 'Alcoholic' });
+    const preferenceBoth = screen.getByRole('radio', { name: 'Both' });
     const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
 
     fireEvent.change(searchBox, { target: { value: 'Gin' } });
-    fireEvent.click(preferenceAlcoholic);
-
-    const findButton = screen.getByRole('button', { name: 'Find' });
+    fireEvent.click(preferenceBoth);
     fireEvent.click(findButton);
 
-    // Check that my mockedfunction is called
     await waitFor(() => expect(mockHandleSearch).toBeCalledTimes(1));
-    expect(mockHandleSearch).toBeCalledWith(filteredGinDrinks);
-
-    // I started by thinking through all the steps from click to handleSearch to see what all needed to be mocked and passed as props.
-  });
-
-  it('Should call handle Search when inputs are filled out without an alcohol preference', () => {
-    // render(<Search />);
-    // const randomButton = screen.getByRole('button', { name: 'Random' });
-    // fireEvent.click(randomButton);
+    expect(mockHandleSearch).toBeCalledWith(foundGinDrinks.drinks);
   });
 
   it('Should call handleError when there is no valid search', () => {
