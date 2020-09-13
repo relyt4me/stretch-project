@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types'
 
 const Results = (props) => {
-  console.log(props)
   let resultsList = []
   if (props.drinksList.length > 0) {
     resultsList = props.drinksList.map(drink => {
@@ -54,8 +53,8 @@ const mapStateToProps = (state) => {
 }
 
 Results.propTypes = {
-  alcoholicDrinks: propTypes.array, 
   drinksList: propTypes.array,
+  alcoholicDrinks: propTypes.array, 
   nonAlcoholicDrinks: propTypes.array
 }
 
