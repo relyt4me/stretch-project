@@ -39,9 +39,8 @@ export class DrinkRecipe extends Component {
       let instructions = recipe.instructions.split('. ');
       return (
         <section className='drink-recipe'>
-          <Link exact to='/'>Back</Link>
+          <Link className='back-btn' exact to='/'>Back</Link>
           <img src={recipe.picture} className='drink-image' alt='glass of the drink'/>
-          <article className='drink-info'>
             <div className='drink-title'>
               <p className='drink-name'>{recipe.name}</p>
               <h3>{recipe.type}</h3>
@@ -59,7 +58,6 @@ export class DrinkRecipe extends Component {
                 {this.displayInstructions(instructions)}
               </ol>
             </div>
-          </article>
         </section>
       )
     } else if (hasErrored !== '') {
