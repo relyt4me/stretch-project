@@ -147,14 +147,13 @@ describe.only('Search', () => {
 
   it('Should call handleError when there is no valid search', async () => {
     const foundNothing = null;
-    const alcoholicDrinks = [{ idDrink: '2' }, { idDrink: '3' }, { idDrink: '4' }];
 
-    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
-    const mockHandleSearch = jest.fn();
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundNothing);
+    const mockHandleError = jest.fn();
 
     render(
       <MemoryRouter>
-        <Search handleSearch={mockHandleSearch} alcoholicDrinks={alcoholicDrinks} />
+        <Search handleError={mockHandleError} />
       </MemoryRouter>
     );
 
@@ -162,12 +161,12 @@ describe.only('Search', () => {
     const searchBox = screen.getByPlaceholderText('Vodka');
     const findButton = screen.getByRole('button', { name: 'Find' });
 
-    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.change(searchBox, { target: { value: 'Gi' } });
     fireEvent.click(preferenceAlcoholic);
     fireEvent.click(findButton);
 
-    await waitFor(() => expect(mockHandleSearch).toBeCalledTimes(1));
-    expect(mockHandleSearch).toBeCalledWith(filteredGinDrinks);
+    await waitFor(() => expect(mockHandleError).toBeCalledTimes(1));
+    expect(mockHandleError).toBeCalledWith("We're sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.");
   });
 
   it('Should call handleError when there is a bad response from the server', () => {
