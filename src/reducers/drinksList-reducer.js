@@ -1,4 +1,4 @@
-const drinksListReducer = (state = [], action) => {
+const drinksListReducer = (state = null, action) => {
   switch (action.type) {
     case 'ADD_DRINKS_LIST':
       return action.drinksList;
