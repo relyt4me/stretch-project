@@ -93,7 +93,6 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => {
   return {
     fetchRecipe: (id) => dispatch(collectRecipe(id)),
-    errorHandler: (error) => dispatch(createError(error))
   };
 };
 
