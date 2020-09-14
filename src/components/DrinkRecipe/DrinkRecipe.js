@@ -40,7 +40,8 @@ export class DrinkRecipe extends Component {
       return (
         <section className='drink-recipe'>
           <Link className='back-btn' exact to='/'>Back</Link>
-          <img src={recipe.picture} className='drink-image' alt='glass of the drink'/>
+          <div className='drink-data'>
+            <img src={recipe.picture} className='drink-image' alt='glass of the drink'/>
             <div className='drink-title'>
               <p className='drink-name'>{recipe.name}</p>
               <h3>{recipe.type}</h3>
@@ -58,6 +59,7 @@ export class DrinkRecipe extends Component {
                 {this.displayInstructions(instructions)}
               </ol>
             </div>
+          </div>
         </section>
       )
     } else if (hasErrored !== '') {
@@ -80,7 +82,7 @@ DrinkRecipe.propTypes = {
   hasErrored: PropTypes.string
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     drinkId: state.drinkId,
     recipe: state.drinkRecipe,
@@ -88,7 +90,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     fetchRecipe: (id) => dispatch(collectRecipe(id)),
     errorHandler: (error) => dispatch(createError(error))
@@ -108,7 +110,7 @@ export const collectRecipe = (id) => {
   };
 };
 
-const fixRecipeData = (data) => {
+export const fixRecipeData = (data) => {
   const drinkRecipe = {
     id: data.idDrink,
     name: data.strDrink,
