@@ -2,9 +2,9 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
 // import rootReducer from '../../reducers/index';
-import { Search } from './Search';
+import { Search, mapStateToProps } from './Search';
 import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
 import '@testing-library/jest-dom';
 jest.mock('../../helpers/apiCalls');
@@ -169,21 +169,40 @@ describe.only('Search', () => {
     expect(mockHandleError).toBeCalledWith("We're sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.");
   });
 
-  it('Should call handleError when there is a bad response from the server', () => {
-    // render(<Search />);
-    // const randomButton = screen.getByRole('button', { name: 'Random' });
-    // fireEvent.click(randomButton);
+  it('Should call handleError when there is a bad response from the server', async () => {
+    const randomRecipeError = null;
+
+    fetchRandomDrink.mockResolvedValueOnce(randomRecipeError);
+    const mockHandleError = jest.fn();
+
+    render(
+      <MemoryRouter>
+        <Search handleError={mockHandleError} />
+      </MemoryRouter>
+    );
+
+    const randomButton = screen.getByRole('button', { name: 'Random' });
+
+    fireEvent.click(randomButton);
+
+    await waitFor(() => expect(mockHandleError).toBeCalledTimes(1));
+    expect(mockHandleError).toBeCalledWith('Our bartender is out. Please try again later.');
   });
 
   it('Should return only the necessary information from the redux store', () => {
-    // render(<Search />);
-    // const randomButton = screen.getByRole('button', { name: 'Random' });
-    // fireEvent.click(randomButton);
+    const mockState = {
+      alcoholicDrinks: [{ idDrink: '2' }, { idDrink: '3' }, { idDrink: '4' }],
+      nonAlcoholicDrinks: [{ idDrink: '1' }, { idDrink: '5' }, { idDrink: '8' }],
+      drinkRecipe: {},
+      drinkId: '45',
+      errorMessage: 'Test Error',
+    };
+    const expected = {
+      alcoholicDrinks: [{ idDrink: '2' }, { idDrink: '3' }, { idDrink: '4' }],
+      nonAlcoholicDrinks: [{ idDrink: '1' }, { idDrink: '5' }, { idDrink: '8' }],
+    };
+
+    const mappedProps = mapStateToProps(mockState);
+    expect(mappedProps).toEqual(expected);
   });
 });
-
-// test line 35
-// line 37
-// line 41
-// line 67
-// test props based on message
