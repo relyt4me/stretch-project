@@ -1,6 +1,5 @@
 import React from 'react';
-import { Results } from './Results';
-// import mapStateToProps from './Results';
+import { Results, mapStateToProps } from './Results';
 import { screen, render} from '@testing-library/react';
 import '@testing-library/jest-dom'
 import { BrowserRouter } from 'react-router-dom';
@@ -29,13 +28,8 @@ describe('Results component', () => {
     const resultsHeading = screen.getByText('Sorry, we couldn\'t find any cocktails that match your search.');
 
     expect(resultsHeading).toBeInTheDocument();
-  });
+  }); 
 
-
-  //Add a test to test mapStateToProps 
-
-
-  //MAY NEED TO MOVE THIS TO APP INTEGRATION TESTS SINCE SEARCH NEEDS TO BE PERFORMED IN ORDER TO SEE RESULTS CARDS OR ERROR MSG
   it('should display the correct amount of drink cards based on the results', () => {
 
     const mockDrinks = [
@@ -73,21 +67,62 @@ describe('Results component', () => {
 
   });
 
-  // it('should display an error message if there are no results to display', () => {
+  it('should display an error message if there are no results to display', () => {
 
-  //   //mock out resolved value of results array to be empty
-  //   const store = createStore(rootReducer);
+    const store = createStore(rootReducer);
 
-  //   render(
-  //     <Provider store={store}>
-  //       <BrowserRouter>
-  //         <Results drinksList={[]} />
-  //       </BrowserRouter>
-  //     </Provider>
-  //   )
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Results drinksList={[]} />
+        </BrowserRouter>
+      </Provider>
+    )
 
-  //   const noResults = screen.getByText('Sorry, we couldn\'t find any cocktails that match your search.');
+    const noResults = screen.getByText('Sorry, we couldn\'t find any cocktails that match your search.');
 
-  //   expect(noResults).toBeInTheDocument(); 
-  // })
+    expect(noResults).toBeInTheDocument(); 
+  });
+
+  it('should only return the necessary info from the redux store', () => {
+    const store = createStore(rootReducer);
+
+    const mockDrinks = [
+      {
+        strDrink: 'Margarita',
+        strDrinkThumb: 'https://margarita.com',
+        idDrink: '1'
+      },
+      {
+        strDrink: 'Whiskey Sour',
+        strDrinkThumb: 'https://whiskey-sour.com',
+        idDrink: '2'
+      }
+    ]
+
+    const mockState = {
+      drinksList: mockDrinks,
+      alcoholicDrinks: [],
+      nonAlcoholicDrinks: [],
+      drinkId: '',
+      drinkRecipe: {}
+    }
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Results drinksList={[]} />
+        </BrowserRouter>
+      </Provider>
+    )
+
+    const expected = {
+      drinksList: mockDrinks,
+      alcoholicDrinks: [],
+      nonAlcoholicDrinks: []
+    }
+
+    const props = mapStateToProps(mockState);
+    expect(props).toEqual(expected)
+  });
 })
