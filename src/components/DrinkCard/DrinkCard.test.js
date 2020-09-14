@@ -3,19 +3,11 @@ import DrinkCard from './DrinkCard';
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from '../../reducers/index';
 
 describe('Drink Card', () => {
-  let store; 
-  beforeEach(() => {
-    store = createStore(rootReducer);
-  })
   it('should display an image and cocktail name when rendered', () => {
 
     render(
-      <Provider store={store}>
         <BrowserRouter>
           <DrinkCard
             key={'1'}
@@ -25,7 +17,6 @@ describe('Drink Card', () => {
             alcoholContent={undefined}
           />
         </BrowserRouter>
-      </Provider>
     )
 
     const drinkName = screen.getByText('Margarita');
@@ -44,7 +35,6 @@ describe('Drink Card', () => {
     }
 
     render(
-      <Provider store={store}>
         <BrowserRouter>
           <DrinkCard
             key={'45'}
@@ -54,7 +44,6 @@ describe('Drink Card', () => {
             alcoholContent={drink}
           />
         </BrowserRouter>
-      </Provider>
     )
 
     const drinkName = screen.getByText('Apple Pie Smoothie');
