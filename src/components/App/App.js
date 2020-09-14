@@ -22,26 +22,30 @@ class App extends Component {
     return (
       <div className='App'>
         <Header />
-        <Route exact path='/recipe/:id/:drinkname' render={({match}) => {
-          const drinkId = match.params.id;
-          this.props.collectId(drinkId)
-          return (
-            <>
-              <Search />
-              <DrinkRecipe />
-            </>
-          )}} />
+        <Route
+          exact
+          path='/recipe/:id/:drinkname'
+          render={({ match }) => {
+            const drinkId = match.params.id;
+            this.props.collectId(drinkId);
+            return (
+              <>
+                <DrinkRecipe />
+              </>
+            );
+          }}
+        />
         <Route
           exact
           path='/'
           render={() => {
-            this.props.resetRecipe(); 
+            this.props.resetRecipe();
             return (
               <>
                 <Search />
                 <Results />
               </>
-            )
+            );
           }}
         />
       </div>
@@ -53,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: (type) => dispatch(collectDrinkData(type)),
     collectId: (id) => dispatch(addRecipeId(id)),
-    resetRecipe: () => dispatch(resetRecipe())
+    resetRecipe: () => dispatch(resetRecipe()),
   };
 };
 
