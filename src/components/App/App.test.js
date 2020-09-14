@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from '../../reducers/index.js';
 import thunk from 'redux-thunk';
 import '@testing-library/jest-dom';
-import { fetchDrinks, fetchDrinkByIngredient } from '../../helpers/apiCalls';
+import { fetchDrinks, fetchDrinkByIngredient, fetchDrinkRecipe } from '../../helpers/apiCalls';
 jest.mock('../../helpers/apiCalls');
 
 describe('App', () => {
@@ -37,7 +37,7 @@ describe('App', () => {
     expect(welcomeHeading).toBeInTheDocument();
   });
 
-  it.only('Should show a list of search results based on a search', async () => {
+  it('Should show a list of search results based on a search', async () => {
     fetchDrinks.mockResolvedValue({});
     const foundGinDrinks = {
       drinks: [
@@ -76,9 +76,90 @@ describe('App', () => {
     expect(drink4Name).toBeInTheDocument();
   });
 
-  it('Should show an error message if there is no matching search', () => {});
+  // it('Should show an error message if there is no matching search', () => {
+  //    fetchDrinks.mockResolvedValue({});
+  //   const foundNothing = null;
+  //   fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
 
-  it('Should Change page when a drink from the list is selected', () => {});
+  //   render(
+  //     <Provider store={store}>
+  //       <MemoryRouter>
+  //         <App />
+  //       </MemoryRouter>
+  //     </Provider>
+  //   );
+
+  //   const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+  //   const searchBox = screen.getByPlaceholderText('Vodka');
+  //   const findButton = screen.getByRole('button', { name: 'Find' });
+
+  //   fireEvent.change(searchBox, { target: { value: 'Gin' } });
+  //   fireEvent.click(preferenceBoth);
+  //   fireEvent.click(findButton);
+
+  //   const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
+  //   const drink2Name = screen.getByText('Drink2A');
+  //   const drink3Image = screen.getByTitle('Drink3A');
+  //   const drink4Name = screen.getByText('Drink4A');
+
+  //   expect(drink1Image).toBeInTheDocument();
+  //   expect(drink2Name).toBeInTheDocument();
+  //   expect(drink3Image).toBeInTheDocument();
+  //   expect(drink4Name).toBeInTheDocument();
+  // });
+
+  it.only('Should Change page when a drink from the list is selected', async () => {
+    fetchDrinks.mockResolvedValue({});
+    const foundGinDrinks = {
+      drinks: [
+        { strDrink: 'Drink1NA', idDrink: '1', strDrinkThumb: 'linkFor1' },
+        { strDrink: 'Drink2A', idDrink: '2', strDrinkThumb: 'linkFor2' },
+        { strDrink: 'Drink3A', idDrink: '3', strDrinkThumb: 'linkFor3' },
+        { strDrink: 'Drink4A', idDrink: '4', strDrinkThumb: 'linkFor4' },
+      ],
+    };
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
+
+    const mockDrinkRecipe = {
+      drinks: [
+        {
+          idDrink: '1',
+          strDrink: 'Drink1NA',
+          strAlcoholic: 'Alcoholic',
+          strGlass: 'Cocktail glass',
+          strInstructions: 'Add alcohol. Drink it.',
+          strDrinkThumb: 'linkFor1',
+          strIngredient1: 'Tequila',
+          strMeasure1: 'One Bottle',
+        },
+      ],
+    };
+    fetchDrinkRecipe.mockResolvedValue(mockDrinkRecipe);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceBoth);
+    fireEvent.click(findButton);
+
+    const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
+
+    fireEvent.click(drink1Image);
+
+    const drinkGlass = await waitFor(() => screen.getByText('Cocktail glass'));
+
+    expect(drinkGlass).toBeInTheDocument();
+  });
 
   it('Should Display a random drink when the random drink is clicked', () => {});
 
