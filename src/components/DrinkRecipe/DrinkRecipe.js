@@ -1,47 +1,47 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './DrinkRecipe.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createDrinkRecipe, createError } from '../../actions';
 import { fetchDrinkRecipe } from '../../helpers/apiCalls';
 
-class DrinkRecipe extends Component {
+export class DrinkRecipe extends Component {
 
   componentDidMount() {
     this.props.fetchRecipe(this.props.drinkId)
   }
 
-  displayRecipe(recipe) {
+  displayIngredients(recipe) {
     return recipe.ingredients.filter(ingredient => {
         if(ingredient != null) {
           return ingredient;
         }
       }).map((ingredient, index) => {
         return (
-          <li>{recipe.ingredientAmounts[index]}{ingredient}</li>
+          <li key={index}>{recipe.ingredientAmounts[index]}{ingredient}</li>
         )
       })
   }
 
   displayInstructions(instructions) {
-    return instructions.map(instruction => {
+    return instructions.map((instruction, index) => {
       return (
-        <li>{instruction}</li>
+        <li key={index}>{instruction}</li>
       )
     })
   }
 
   render() {
-    const { recipe } = this.props;
+    const { recipe, hasErrored } = this.props;
 
     if (recipe['instructions']) {
       let instructions = recipe.instructions.split('. ');
       return (
         <section className='drink-recipe'>
-          <Link exact to='/'>Back</Link>
-          <img src={recipe.picture} className='drink-image' alt='image of drink'/>
-          <article className='drink-info'>
+          <Link className='back-btn' exact to='/'>Back</Link>
+          <div className='drink-data'>
+            <img src={recipe.picture} className='drink-image' alt='glass of the drink'/>
             <div className='drink-title'>
               <p className='drink-name'>{recipe.name}</p>
               <h3>{recipe.type}</h3>
@@ -50,7 +50,7 @@ class DrinkRecipe extends Component {
             <div className='ingredients'>
               <h2 className='ingredients-title'>Ingredients</h2>
               <ul>
-                {this.displayRecipe(recipe)}
+                {this.displayIngredients(recipe)}
             </ul>
             </div>
             <div className='instructions'>
@@ -59,47 +59,58 @@ class DrinkRecipe extends Component {
                 {this.displayInstructions(instructions)}
               </ol>
             </div>
-          </article>
+          </div>
         </section>
       )
-    } else {
+    } else if (hasErrored !== '') {
       return (
-        <h2>Loading...</h2>
+        <h2 className='error-message'>{hasErrored}</h2>
+      )
+    }else {
+      return (
+        <h2 className='loading'>Loading...</h2>
       )
     }
 
   }
 }
 
-const mapStateToProps = (state) => {
+DrinkRecipe.propTypes = {
+  drinkId: PropTypes.string.isRequired,
+  recipe: PropTypes.object.isRequired,
+  fetchRecipe: PropTypes.func.isRequired,
+  hasErrored: PropTypes.string
+}
+
+export const mapStateToProps = (state) => {
   return {
     drinkId: state.drinkId,
     recipe: state.drinkRecipe,
+    hasErrored: state.errorMessage
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRecipe: (id) => dispatch(collectRecipe(id))
+    fetchRecipe: (id) => dispatch(collectRecipe(id)),
+    errorHandler: (error) => dispatch(createError(error))
   };
 };
 
-const collectRecipe = (id) => {
-  console.log("fetch ", id);
+export const collectRecipe = (id) => {
   return (dispatch) => {
-
     fetchDrinkRecipe(id)
       .then((recipe) => {
         const newRecipe = fixRecipeData(recipe.drinks[0]);
         dispatch(createDrinkRecipe(newRecipe))
       })
       .catch((error) => {
-        dispatch(createError("We're sorry, we couldn\'t find that recipe!"));
+        dispatch(createError("We're sorry, we couldn't find that recipe!"));
       });
   };
 };
 
-const fixRecipeData = (data) => {
+export const fixRecipeData = (data) => {
   const drinkRecipe = {
     id: data.idDrink,
     name: data.strDrink,

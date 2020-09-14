@@ -1,32 +1,148 @@
-.drink-recipe {
-  width: 80vw;
-  background-color: rose;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 5vw;
-  margin: 5vw;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
 .drink-image {
-  grid-column: 1;
-  width: 40vw;
   border-radius: 6px;
-}
-
-.drink-info {
-  grid-column: 2;
-  color: #c3f584;
-}
-
-.drink-name {
-  margin: 0;
-  font-family: Automani;
-  font-size: 6vh;
 }
 
 .drink-title,
 .ingredients-title,
 .instructions-title {
   text-align: center;
+}
+
+@media screen and (max-width: 1540px) {
+  .drink-recipe {
+    display: block;
+    width: 90%;
+    margin: 2vw;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #c3f584;
+    align-items: center;
+  }
+
+  .drink-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column: 1 / span 2;
+  }
+
+  .drink-image {
+    width: 95%;
+    padding: 5%;
+    grid-column: 1;
+    padding: 0;
+    margin-left: 3%;
+    margin-bottom: 2em;
+  }
+
+  .drink-name {
+    margin-top: 0;
+    font-family: Automani;
+    font-size: 1.7em;
+  }
+
+  .drink-title {
+    margin: .5em;
+    margin-top: 1.75em;
+    font-size: 1.8em;
+    width: 90%;
+  }
+
+  .ingredients,
+  .instructions {
+    height: 35vh;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .ingredients {
+    grid-column: 1;
+    grid-row: 2;
+    overflow: scroll;
+  }
+  .instructions {
+    grid-column: 2;
+    grid-row: 2;
+    overflow: scroll;
+    margin-right: 1em;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .drink-data {
+    grid-template-rows: auto auto auto;
+  }
+
+  .drink-name {
+    font-size: 1.6em;
+  }
+
+  .drink-title {
+    margin-top: 1.25em;
+    font-size: 1.6em;
+  }
+
+  .ingredients,
+  .instructions {
+    height: 39vh;
+    font-size: 1.5em;
+    margin-top: .5em;
+  }
+
+  .ingredients {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+  }
+
+  .instructions {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    margin-right: 0.5em;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .drink-recipe {
+    width: 98%;
+    margin: .5em;
+  }
+
+  .drink-image {
+    width: 40vw;
+  }
+
+  .drink-name {
+    font-size: 1.35em;
+  }
+
+  .drink-title {
+    margin: 0;
+    margin-top: 1em;
+    font-size: 1.4em;
+  }
+
+  .ingredients,
+  .instructions {
+    font-size: 1.5em;
+    margin: 0;
+    height: 30vh;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .drink-image {
+    width: 45vw;
+  }
+
+  .drink-name {
+    font-size: 1.25em;
+  }
+
+  .drink-title {
+    font-size: 1.2em;
+  }
+
+  .ingredients,
+  .instructions {
+    font-size: 1em;
+  }
 }
