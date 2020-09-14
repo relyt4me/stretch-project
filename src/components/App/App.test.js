@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from '../../reducers/index.js';
 import thunk from 'redux-thunk';
 import '@testing-library/jest-dom';
-import { fetchDrinks } from '../../helpers/apiCalls';
+import { fetchDrinks, fetchDrinkByIngredient } from '../../helpers/apiCalls';
 jest.mock('../../helpers/apiCalls');
 
 describe('App', () => {
@@ -17,7 +17,7 @@ describe('App', () => {
     store = createStore(rootReducer, applyMiddleware(thunk));
   });
 
-  it.only('Should display app on page load', async () => {
+  it('Should display app on page load', async () => {
     fetchDrinks.mockResolvedValue({});
 
     render(
@@ -37,7 +37,44 @@ describe('App', () => {
     expect(welcomeHeading).toBeInTheDocument();
   });
 
-  it('Should show a list of search results based on a search', () => {});
+  it.only('Should show a list of search results based on a search', async () => {
+    fetchDrinks.mockResolvedValue({});
+    const foundGinDrinks = {
+      drinks: [
+        { strDrink: 'Drink1NA', idDrink: '1', strDrinkThumb: 'linkFor1' },
+        { strDrink: 'Drink2A', idDrink: '2', strDrinkThumb: 'linkFor2' },
+        { strDrink: 'Drink3A', idDrink: '3', strDrinkThumb: 'linkFor3' },
+        { strDrink: 'Drink4A', idDrink: '4', strDrinkThumb: 'linkFor4' },
+      ],
+    };
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceBoth);
+    fireEvent.click(findButton);
+
+    const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
+    const drink2Name = screen.getByText('Drink2A');
+    const drink3Image = screen.getByTitle('Drink3A');
+    const drink4Name = screen.getByText('Drink4A');
+
+    expect(drink1Image).toBeInTheDocument();
+    expect(drink2Name).toBeInTheDocument();
+    expect(drink3Image).toBeInTheDocument();
+    expect(drink4Name).toBeInTheDocument();
+  });
 
   it('Should show an error message if there is no matching search', () => {});
 
