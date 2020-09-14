@@ -2,14 +2,12 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-// import { createStore } from 'redux';
-// import rootReducer from '../../reducers/index';
 import { Search, mapStateToProps } from './Search';
 import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
 import '@testing-library/jest-dom';
 jest.mock('../../helpers/apiCalls');
 
-describe.only('Search', () => {
+describe('Search', () => {
   it('Should display search form on render', () => {
     render(
       <MemoryRouter>

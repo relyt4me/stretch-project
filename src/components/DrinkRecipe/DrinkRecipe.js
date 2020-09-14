@@ -7,29 +7,31 @@ import { createDrinkRecipe, createError } from '../../actions';
 import { fetchDrinkRecipe } from '../../helpers/apiCalls';
 
 export class DrinkRecipe extends Component {
-
   componentDidMount() {
-    this.props.fetchRecipe(this.props.drinkId)
+    this.props.fetchRecipe(this.props.drinkId);
   }
 
   displayIngredients(recipe) {
-    return recipe.ingredients.filter(ingredient => {
-        if(ingredient != null) {
+    return recipe.ingredients
+      .filter((ingredient) => {
+        if (ingredient != null) {
           return ingredient;
         }
-      }).map((ingredient, index) => {
-        return (
-          <li key={index}>{recipe.ingredientAmounts[index]}{ingredient}</li>
-        )
       })
+      .map((ingredient, index) => {
+        return (
+          <li key={index}>
+            {recipe.ingredientAmounts[index]}
+            {ingredient}
+          </li>
+        );
+      });
   }
 
   displayInstructions(instructions) {
     return instructions.map((instruction, index) => {
-      return (
-        <li key={index}>{instruction}</li>
-      )
-    })
+      return <li key={index}>{instruction}</li>;
+    });
   }
 
   render() {
@@ -39,9 +41,11 @@ export class DrinkRecipe extends Component {
       let instructions = recipe.instructions.split('. ');
       return (
         <section className='drink-recipe'>
-          <Link className='back-btn' exact to='/'>Back</Link>
+          <Link className='back-btn' to='/'>
+            Back
+          </Link>
           <div className='drink-data'>
-            <img src={recipe.picture} className='drink-image' alt='glass of the drink'/>
+            <img src={recipe.picture} className='drink-image' alt='glass of the drink' />
             <div className='drink-title'>
               <p className='drink-name'>{recipe.name}</p>
               <h3>{recipe.type}</h3>
@@ -49,29 +53,20 @@ export class DrinkRecipe extends Component {
             </div>
             <div className='ingredients'>
               <h2 className='ingredients-title'>Ingredients</h2>
-              <ul>
-                {this.displayIngredients(recipe)}
-            </ul>
+              <ul>{this.displayIngredients(recipe)}</ul>
             </div>
             <div className='instructions'>
               <h2 className='instructions-title'>Instructions</h2>
-              <ol>
-                {this.displayInstructions(instructions)}
-              </ol>
+              <ol>{this.displayInstructions(instructions)}</ol>
             </div>
           </div>
         </section>
-      )
+      );
     } else if (hasErrored !== '') {
-      return (
-        <h2 className='error-message'>{hasErrored}</h2>
-      )
-    }else {
-      return (
-        <h2 className='loading'>Loading...</h2>
-      )
+      return <h2 className='error-message'>{hasErrored}</h2>;
+    } else {
+      return <h2 className='loading'>Loading...</h2>;
     }
-
   }
 }
 
@@ -79,16 +74,16 @@ DrinkRecipe.propTypes = {
   drinkId: PropTypes.string.isRequired,
   recipe: PropTypes.object.isRequired,
   fetchRecipe: PropTypes.func.isRequired,
-  hasErrored: PropTypes.string
-}
+  hasErrored: PropTypes.string,
+};
 
 export const mapStateToProps = (state) => {
   return {
     drinkId: state.drinkId,
     recipe: state.drinkRecipe,
-    hasErrored: state.errorMessage
-  }
-}
+    hasErrored: state.errorMessage,
+  };
+};
 
 export const mapDispatchToProps = (dispatch) => {
   return {
@@ -101,7 +96,7 @@ export const collectRecipe = (id) => {
     fetchDrinkRecipe(id)
       .then((recipe) => {
         const newRecipe = fixRecipeData(recipe.drinks[0]);
-        dispatch(createDrinkRecipe(newRecipe))
+        dispatch(createDrinkRecipe(newRecipe));
       })
       .catch((error) => {
         dispatch(createError("We're sorry, we couldn't find that recipe!"));
@@ -118,9 +113,9 @@ export const fixRecipeData = (data) => {
     instructions: data.strInstructions,
     picture: data.strDrinkThumb,
     ingredients: [data.strIngredient1, data.strIngredient2, data.strIngredient3, data.strIngredient4, data.strIngredient5, data.strIngredient6, data.strIngredient7, data.strIngredient8, data.strIngredient9, data.strIngredient10, data.strIngredient11, data.strIngredient12, data.strIngredient13, data.strIngredient14, data.strIngredient15],
-    ingredientAmounts: [data.strMeasure1, data.strMeasure2, data.strMeasure3, data.strMeasure4, data.strMeasure5, data.strMeasure6, data.strMeasure7, data.strMeasure8, data.strMeasure9, data.strMeasure10, data.strMeasure11, data.strMeasure12, data.strMeasure13, data.strMeasure14, data.strMeasure15]
-  }
+    ingredientAmounts: [data.strMeasure1, data.strMeasure2, data.strMeasure3, data.strMeasure4, data.strMeasure5, data.strMeasure6, data.strMeasure7, data.strMeasure8, data.strMeasure9, data.strMeasure10, data.strMeasure11, data.strMeasure12, data.strMeasure13, data.strMeasure14, data.strMeasure15],
+  };
   return drinkRecipe;
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrinkRecipe);
