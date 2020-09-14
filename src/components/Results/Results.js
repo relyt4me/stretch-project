@@ -5,17 +5,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types'
 
-//change to class component
-//add state with welcomeView: true
-//when a search gets executed, set welcomeView to false 
-
 export const Results = (props) => {
-  let resultsList = []
-  if (props.drinksList.length > 0) {
+  let resultsList;
+  if (props.drinksList) {
     resultsList = props.drinksList.map(drink => {
-      const alcoholContent = props.nonAlcoholicDrinks.find(nonAlcDrink => {
-        return nonAlcDrink.idDrink === drink.idDrink
-      });
+      const alcoholContent = props.nonAlcoholicDrinks.find(nonAlcDrink => nonAlcDrink.idDrink === drink.idDrink);
       return (
         <Link to={`/recipe/${drink.idDrink}/${drink.strDrink}`} key={drink.idDrink}>
           <DrinkCard
@@ -31,10 +25,16 @@ export const Results = (props) => {
 
   return (
     <>
-      {resultsList.length === 0 &&
+      {!resultsList &&
+        <>
+          <h2 className='results-heading'>Welcome to Fridge To Glass!</h2>
+        <p className='welcome-msg'>Please type an ingredient in the search bar above, select your alcohol preference, and click <span className='bold italic'>Find Drinks</span> to see a list of cocktails with that ingredient.<br></br><br></br><span className='bold'>Happy bartending!</span></p>
+        </>
+      }
+      {resultsList && resultsList.length === 0 &&
         <h2 className='results-heading'>Sorry, we couldn't find any cocktails that match your search.</h2>
       }
-      {resultsList.length > 0 &&
+      {resultsList && resultsList.length > 0 &&
         <>
           <h2 className='results-heading'>Your Cocktail Results</h2>
           <section className='Results' aria-label='cocktail results'>
