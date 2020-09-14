@@ -17,7 +17,7 @@ describe('Results component', () => {
       <Provider store={store}>
         <BrowserRouter>
           <Results 
-            drinksList={[]}
+            drinksList={null}
             alcoholicDrinks={[]}
             nonAlcoholicDrinks={[]}
           /> 
@@ -25,9 +25,9 @@ describe('Results component', () => {
       </Provider>
     )
 
-    const resultsHeading = screen.getByText('Sorry, we couldn\'t find any cocktails that match your search.');
+    const welcomeHeading = screen.getByText('Welcome to Fridge To Glass!');
 
-    expect(resultsHeading).toBeInTheDocument();
+    expect(welcomeHeading).toBeInTheDocument();
   }); 
 
   it('should display the correct amount of drink cards based on the results', () => {
