@@ -161,7 +161,7 @@ describe('App', () => {
     expect(drinkGlass).toBeInTheDocument();
   });
 
-  it.only('Should Display a random drink when the random drink is clicked', async () => {
+  it('Should Display a random drink when the random drink is clicked', async () => {
     fetchDrinks.mockResolvedValue({});
 
     const mockDrinkRecipe = {
@@ -198,9 +198,119 @@ describe('App', () => {
     expect(drinkGlass).toBeInTheDocument();
   });
 
-  it('Should Return to the home page with previous search on logo click', () => {});
+  it('Should Return to the home page with previous search on logo click', async () => {
+    fetchDrinks.mockResolvedValue({});
+    const foundGinDrinks = {
+      drinks: [
+        { strDrink: 'Drink1NA', idDrink: '1', strDrinkThumb: 'linkFor1' },
+        { strDrink: 'Drink2A', idDrink: '2', strDrinkThumb: 'linkFor2' },
+        { strDrink: 'Drink3A', idDrink: '3', strDrinkThumb: 'linkFor3' },
+        { strDrink: 'Drink4A', idDrink: '4', strDrinkThumb: 'linkFor4' },
+      ],
+    };
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
 
-  it('Should Return to the home page with previous search on back click', () => {});
+    const mockDrinkRecipe = {
+      drinks: [
+        {
+          idDrink: '1',
+          strDrink: 'Drink1NA',
+          strAlcoholic: 'Alcoholic',
+          strGlass: 'Cocktail glass',
+          strInstructions: 'Add alcohol. Drink it.',
+          strDrinkThumb: 'linkFor1',
+          strIngredient1: 'Tequila',
+          strMeasure1: 'One Bottle',
+        },
+      ],
+    };
+    fetchDrinkRecipe.mockResolvedValue(mockDrinkRecipe);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceBoth);
+    fireEvent.click(findButton);
+
+    const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
+
+    fireEvent.click(drink1Image);
+
+    const logo = await waitFor(() => screen.getByAltText('Three neon glasses logo for Fridge to Glass'));
+
+    fireEvent.click(logo);
+
+    const drink2Image = await waitFor(() => screen.getByTitle('Drink2A'));
+
+    expect(drink2Image).toBeInTheDocument();
+  });
+
+  it('Should Return to the home page with previous search on back click', async () => {
+    fetchDrinks.mockResolvedValue({});
+    const foundGinDrinks = {
+      drinks: [
+        { strDrink: 'Drink1NA', idDrink: '1', strDrinkThumb: 'linkFor1' },
+        { strDrink: 'Drink2A', idDrink: '2', strDrinkThumb: 'linkFor2' },
+        { strDrink: 'Drink3A', idDrink: '3', strDrinkThumb: 'linkFor3' },
+        { strDrink: 'Drink4A', idDrink: '4', strDrinkThumb: 'linkFor4' },
+      ],
+    };
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
+
+    const mockDrinkRecipe = {
+      drinks: [
+        {
+          idDrink: '1',
+          strDrink: 'Drink1NA',
+          strAlcoholic: 'Alcoholic',
+          strGlass: 'Cocktail glass',
+          strInstructions: 'Add alcohol. Drink it.',
+          strDrinkThumb: 'linkFor1',
+          strIngredient1: 'Tequila',
+          strMeasure1: 'One Bottle',
+        },
+      ],
+    };
+    fetchDrinkRecipe.mockResolvedValue(mockDrinkRecipe);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceBoth);
+    fireEvent.click(findButton);
+
+    const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
+
+    fireEvent.click(drink1Image);
+
+    const backButton = await waitFor(() => screen.getByText('Back'));
+
+    fireEvent.click(backButton);
+
+    const drink2Image = await waitFor(() => screen.getByTitle('Drink2A'));
+
+    expect(drink2Image).toBeInTheDocument();
+  });
 
   it('should only return the necessary information from the store', () => {});
 
