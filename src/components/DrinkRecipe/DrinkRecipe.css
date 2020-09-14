@@ -1,24 +1,5 @@
-.drink-recipe {
-  width: 80vw;
-  background-color: rose;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 5vw;
-  margin: 5vw;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #c3f584;
-}
-
 .drink-image {
-  grid-column: 1;
-  width: 40vw;
   border-radius: 6px;
-}
-
-.drink-name {
-  margin: 0;
-  font-family: Automani;
-  font-size: 1.5em;
 }
 
 .drink-title,
@@ -28,118 +9,140 @@
 }
 
 @media screen and (max-width: 1540px) {
-
-}
-
-@media screen and (max-width: 1090px) {
   .drink-recipe {
-    width: 90vw;
-    grid-template-columns: 1fr 1fr;
+    display: block;
+    width: 90%;
+    margin: 2vw;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #c3f584;
+    align-items: center;
   }
-  .back-btn {
-    display: none;
+
+  .drink-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column: 1 / span 2;
   }
 
   .drink-image {
-    margin: 2em;
-    width: 45vw;
+    width: 95%;
+    padding: 5%;
+    grid-column: 1;
+    padding: 0;
+    margin-left: 3%;
+    margin-bottom: 2em;
+  }
+
+  .drink-name {
+    margin-top: 0;
+    font-family: Automani;
+    font-size: 1.7em;
   }
 
   .drink-title {
-    margin-top: 4em;
-    margin-right: 1em;
-    font-size: 2em;
+    margin: .5em;
+    margin-top: 1.75em;
+    font-size: 1.8em;
+    width: 90%;
+  }
+
+  .ingredients,
+  .instructions {
+    height: 35vh;
+    font-size: 1.5em;
+    margin-bottom: 1em;
   }
 
   .ingredients {
+    grid-column: 1;
+    grid-row: 2;
+    overflow: scroll;
+  }
+  .instructions {
+    grid-column: 2;
+    grid-row: 2;
+    overflow: scroll;
+    margin-right: 1em;
+  }
+}
 
+@media screen and (max-width: 1090px) {
+  .drink-data {
+    grid-template-rows: auto auto auto;
+  }
+
+  .drink-name {
+    font-size: 1.6em;
+  }
+
+  .drink-title {
+    margin-top: 1.25em;
+    font-size: 1.6em;
+  }
+
+  .ingredients,
+  .instructions {
+    height: 39vh;
+    font-size: 1.5em;
+    margin-top: .5em;
+  }
+
+  .ingredients {
+    grid-column: 1 / span 2;
+    grid-row: 2;
   }
 
   .instructions {
-    overflow: scroll;
-    height: 30vh;
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    margin-right: 0.5em;
   }
-
 }
 
 @media screen and (max-width: 800px) {
   .drink-recipe {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 2fr 1fr 1fr;
-    width: 90vw;
-    height: 90vh;
-    grid-gap: 0;
-  }
-
-  .back-btn {
-    display: none;
+    width: 98%;
+    margin: .5em;
   }
 
   .drink-image {
-    width: 50vw;
-    padding-bottom: 0;
+    width: 40vw;
   }
 
-  .drink-image,
-  .drink-title {
-    grid-row: 1;
-    padding: 2em;
+  .drink-name {
+    font-size: 1.35em;
   }
 
   .drink-title {
-    grid-column: 2;
-    padding-top: 5em;
-    padding-left: 0;
+    margin: 0;
+    margin-top: 1em;
+    font-size: 1.4em;
   }
 
   .ingredients,
   .instructions {
-    overflow: scroll;
-  }
-
-  .ingredients {
-    grid-row: 2;
-    grid-column: 1 / span 2;
-  }
-
-  .instructions {
-    grid-row: 3;
-    grid-column: 1 / span 2;
+    font-size: 1.5em;
+    margin: 0;
+    height: 30vh;
   }
 }
 
 @media screen and (max-width: 550px) {
-  .drink-recipe {
-    grid-template-rows: none;
-  }
-
   .drink-image {
-    width: 50vw;
+    width: 45vw;
   }
 
-  .drink-image,
-  .drink-title {
-    padding: 0;
+  .drink-name {
+    font-size: 1.25em;
   }
 
   .drink-title {
-    grid-column: 2;
-    padding-top: 2em;
-    padding-left: 0;
+    font-size: 1.2em;
   }
 
   .ingredients,
   .instructions {
-    overflow: scroll;
-  }
-
-  .ingredients {
-    grid-column: 1 / span 2;
-  }
-
-  .instructions {
-    grid-column: 1 / span 2;
-    margin-bottom: 1em;
+    font-size: 1em;
   }
 }
