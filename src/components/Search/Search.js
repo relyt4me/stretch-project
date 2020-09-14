@@ -3,15 +3,16 @@ import './Search.css';
 import { connect } from 'react-redux';
 import { updateDrinksList, createError } from '../../actions';
 import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-class Search extends Component {
+export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchPhrase: '',
       preference: '',
-      randomDrink: null
+      randomDrink: null,
     };
   }
 
@@ -59,17 +60,17 @@ class Search extends Component {
   randomClick = (event) => {
     event.preventDefault();
     fetchRandomDrink()
-      .then(drink => {
+      .then((drink) => {
         this.setState({ randomDrink: drink.drinks[0] });
       })
-      .catch(error => {
-        this.props.handleError('Our bartender is out. Please try again later.')
-      })
+      .catch((error) => {
+        this.props.handleError('Our bartender is out. Please try again later.');
+      });
   };
 
   render() {
     if (this.state.randomDrink) {
-      return <Redirect to={`/recipe/${this.state.randomDrink.idDrink}/${this.state.randomDrink.strDrink}`} />
+      return <Redirect to={`/recipe/${this.state.randomDrink.idDrink}/${this.state.randomDrink.strDrink}`} />;
     }
     return (
       <form className='search-component'>
@@ -109,11 +110,11 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return { alcoholicDrinks: state.alcoholicDrinks, nonAlcoholicDrinks: state.nonAlcoholicDrinks };
 };
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
     handleSearch: (drinksList) => {
       dispatch(updateDrinksList(drinksList));
@@ -125,3 +126,10 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
+
+Search.propTypes = {
+  handleSearch: PropTypes.func,
+  handleError: PropTypes.func,
+  alcoholicDrinks: PropTypes.array,
+  nonAlcoholicDrinks: PropTypes.array,
+};
