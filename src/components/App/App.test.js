@@ -311,8 +311,5 @@ describe('App', () => {
 
     expect(drink2Image).toBeInTheDocument();
   });
-
-  it('should only return the necessary information from the store', () => {});
-
   // It should deal with fail in nonalcoholic drink fetch
 });
