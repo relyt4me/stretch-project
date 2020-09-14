@@ -85,7 +85,6 @@ describe('Results component', () => {
   });
 
   it('should only return the necessary info from the redux store', () => {
-    const store = createStore(rootReducer);
 
     const mockDrinks = [
       {
@@ -107,14 +106,6 @@ describe('Results component', () => {
       drinkId: '',
       drinkRecipe: {}
     }
-
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <Results drinksList={[]} />
-        </BrowserRouter>
-      </Provider>
-    )
 
     const expected = {
       drinksList: mockDrinks,
