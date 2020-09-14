@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import rootReducer from '../../reducers/index.js';
 import thunk from 'redux-thunk';
 import '@testing-library/jest-dom';
-import { fetchDrinks, fetchDrinkByIngredient, fetchDrinkRecipe } from '../../helpers/apiCalls';
+import { fetchDrinks, fetchDrinkByIngredient, fetchDrinkRecipe, fetchRandomDrink } from '../../helpers/apiCalls';
 jest.mock('../../helpers/apiCalls');
 
 describe('App', () => {
@@ -108,7 +108,7 @@ describe('App', () => {
   //   expect(drink4Name).toBeInTheDocument();
   // });
 
-  it.only('Should Change page when a drink from the list is selected', async () => {
+  it('Should Change page when a drink from the list is selected', async () => {
     fetchDrinks.mockResolvedValue({});
     const foundGinDrinks = {
       drinks: [
@@ -161,11 +161,48 @@ describe('App', () => {
     expect(drinkGlass).toBeInTheDocument();
   });
 
-  it('Should Display a random drink when the random drink is clicked', () => {});
+  it.only('Should Display a random drink when the random drink is clicked', async () => {
+    fetchDrinks.mockResolvedValue({});
+
+    const mockDrinkRecipe = {
+      drinks: [
+        {
+          idDrink: '1',
+          strDrink: 'Drink1NA',
+          strAlcoholic: 'Alcoholic',
+          strGlass: 'Cocktail glass',
+          strInstructions: 'Add alcohol. Drink it.',
+          strDrinkThumb: 'linkFor1',
+          strIngredient1: 'Tequila',
+          strMeasure1: 'One Bottle',
+        },
+      ],
+    };
+    fetchRandomDrink.mockResolvedValue(mockDrinkRecipe);
+    fetchDrinkRecipe.mockResolvedValue(mockDrinkRecipe);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const randomButton = await waitFor(() => screen.getByRole('button', { name: 'Random' }));
+
+    fireEvent.click(randomButton);
+
+    const drinkGlass = await waitFor(() => screen.getByText('Cocktail glass'));
+
+    expect(drinkGlass).toBeInTheDocument();
+  });
 
   it('Should Return to the home page with previous search on logo click', () => {});
 
   it('Should Return to the home page with previous search on back click', () => {});
+
+  it('should only return the necessary information from the store', () => {});
 
   // It should deal with fail in nonalcoholic drink fetch
 });
