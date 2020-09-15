@@ -6,7 +6,6 @@
 [![Issues][issues-shield]][issues-url]
 
 
-An image of the product logo.  
 ![logo](./src/assets/f2glogo.png)
 
 ## Table of Contents
@@ -58,12 +57,16 @@ In terminal, go to the project directory and run 'npm start' to open the project
 
 ## Functionality
 
+### Searching for an ingredient to get a list and selecting one for the recipe  
 ![main app functionality](src/assets/main-functionality.gif)
 
+### Random Drink Search 
 ![random drink functionality](src/assets/random-drink.gif)
 
+### Error handling for no drinks in that filter 
 ![no recipes found error](src/assets/filter-no-recipes.gif)
 
+### Error handing for an ingredient not found in any drinks 
 ![ingredient not found with search](src/assets/ingredient-not-found.gif)
 
 ## Contributing
