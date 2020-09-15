@@ -53,7 +53,7 @@ In terminal, go to the project directory and run 'npm start' to open the project
 
 ### Live version
 
-[Deployed Site](https://google.com)
+[Deployed Site](https://fridge-to-glass.herokuapp.com/)
 
 ## Functionality
 
