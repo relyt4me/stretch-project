@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import Results from '../Results/Results';
 import './App.css';
-import Header from '../Header/Header';
+import Header from '../../components/Header/Header';
 import Search from '../Search/Search';
 import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
-// import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchDrinks } from '../../helpers/apiCalls';
 import { createAlcoholicDrinks, createNonAlcoholicDrinks, createError, addRecipeId, resetRecipe } from '../../actions';
-
-//change /drinkRecipe to /:drinkId when we start importing data from api
 
 class App extends Component {
   componentDidMount() {
