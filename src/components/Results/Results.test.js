@@ -70,6 +70,22 @@ describe('Results component', () => {
     expect(noResults).toBeInTheDocument(); 
   });
 
+  it('should display the error from the redux store if there is one', () => {
+
+    render(
+      <BrowserRouter>
+        <Results 
+          drinksList={[]} 
+          errorMessage={'We\'re sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.'}
+        />
+      </BrowserRouter>
+    )
+
+    const noResults = screen.getByText('We\'re sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.');
+
+    expect(noResults).toBeInTheDocument();
+  });
+
   it('should only return the necessary info from the redux store', () => {
 
     const mockDrinks = [
@@ -90,13 +106,15 @@ describe('Results component', () => {
       alcoholicDrinks: [],
       nonAlcoholicDrinks: [],
       drinkId: '',
-      drinkRecipe: {}
+      drinkRecipe: {},
+      errorMessage: ''
     }
 
     const expected = {
       drinksList: mockDrinks,
       alcoholicDrinks: [],
-      nonAlcoholicDrinks: []
+      nonAlcoholicDrinks: [],
+      errorMessage: ''
     }
 
     const props = mapStateToProps(mockState);

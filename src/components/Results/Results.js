@@ -63,7 +63,8 @@ export const mapStateToProps = (state) => {
 Results.propTypes = {
   drinksList: propTypes.array,
   alcoholicDrinks: propTypes.array, 
-  nonAlcoholicDrinks: propTypes.array
+  nonAlcoholicDrinks: propTypes.array,
+  errorMessage: propTypes.string
 }
 
 export default connect(mapStateToProps, null)(Results);
