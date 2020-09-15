@@ -20,5 +20,19 @@ describe('errorReducer', () => {
     const result = errorReducer(initialState, action)
 
     expect(result).toEqual(newState)
+  });
+
+  it('should return the correct state if action is RESET_ERROR', () => {
+    const initialState = 'No drinks found';
+    const action = {
+      type: 'RESET_ERROR',
+      error: ''
+    }
+
+    const newState = '';
+
+    const result = errorReducer(initialState, action)
+
+    expect(result).toEqual(newState)
   })
 })

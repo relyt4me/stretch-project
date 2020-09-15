@@ -35,17 +35,6 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
-  it('should have a type of RESET_DRINKS_LIST', () => {
-    const expectedAction = {
-      type: 'RESET_DRINKS_LIST',
-      drinksList: []
-    }
-
-    const result = actions.resetDrinksList();
-
-    expect(result).toEqual(expectedAction);
-  });
-
   it('should have a type of CREATE_ALCOHOLIC_DRINKS', () => {
     const alcoholicDrinks = [
       {

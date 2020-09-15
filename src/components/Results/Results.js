@@ -39,7 +39,7 @@ export const Results = (props) => {
       {!props.errorMessage && resultsList && resultsList.length === 0 && 
         <h2 className='welcome-msg'>Sorry, we couldn't find any cocktails that match your search.</h2>
       }
-      {resultsList && resultsList.length > 0 &&
+      {!props.errorMessage && resultsList && resultsList.length > 0 &&
         <>
           <h2 className='results-heading'>Your Cocktail Results</h2>
           <section className='Results' aria-label='cocktail results'>

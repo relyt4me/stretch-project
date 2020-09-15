@@ -32,25 +32,4 @@ describe('drinksListReducer', () => {
 
     expect(result).toEqual(newState);
   });
-
-  it('should return the correct state if action is RESET_DRINKS_LIST ', () => {
-    const initialState = [
-      {
-        strDrink: 'G & T',
-        strDrinkThumb: "https://g-and-t-img.com",
-        idDrink: '2'
-      }
-    ];
-
-    const action = {
-      type: 'RESET_DRINKS_LIST',
-      drinksList: []
-    }
-
-    const newState = []
-
-    const result = drinksListReducer(initialState, action);
-
-    expect(result).toEqual(newState)
-  })
 })
