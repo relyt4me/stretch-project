@@ -7,7 +7,7 @@
 
 
 An image of the product logo.  
-![logo](../../assets/f2glogo.png)
+![logo](./src/assets/f2glogo.png)
 
 ## Table of Contents
 
@@ -52,7 +52,7 @@ https://github.com/relyt4me/stretch-project
 
 In terminal, go to the project directory and run 'npm start' to open the project in the browser. Have fun finding a drink to try!
 
-### Live version location if NEEDED
+### Live version
 
 [Deployed Site](https://google.com)
 
@@ -86,15 +86,15 @@ See the [open issues](https://github.com/relyt4me/stretch-project/issues) for a 
 
 👤 **Tyler Haglund**
 - Github: [relyt4me](https://github.com/relyt4me)
-- other link info if needed
+- LinkedIn: [Tyler](https://www.linkedin.com/in/tyler-haglund/)
 
 👤 **Taryn Martin**
 - Github: [tarynmartin](https://github.com/tarynmartin)
-- other link info if needed
+- LinkedIn: [Taryn](https://www.linkedin.com/in/tarynmartin919/)
 
 👤 **Rachel Williams**
 - Github: [rwilliams659](https://github.com/rwilliams659)
-- other link info if needed
+- LinkedIn: [Tyler](https://www.linkedin.com/in/rachelsarahwilliams/)
 
 ## Acknowledgements and Resources
 
