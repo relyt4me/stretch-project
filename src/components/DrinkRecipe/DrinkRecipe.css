@@ -77,12 +77,12 @@
   .ingredients {
     grid-column: 1;
     grid-row: 3;
-    overflow: scroll;
+    overflow-y: scroll;
   }
   .instructions {
     grid-column: 2;
     grid-row: 3;
-    overflow: scroll;
+    overflow-y: scroll;
     margin-right: 1em;
   }
 }
