@@ -18,7 +18,20 @@ describe('App', () => {
   });
 
   it('Should display app on page load', async () => {
-    fetchDrinks.mockResolvedValue({});
+    fetchDrinks.mockResolvedValueOnce(
+      {
+        drinks: [
+         { strDrink: 'Drink1NA', idDrink: '1', strDrinkThumb: 'linkFor1' },
+        ]
+      }
+    );
+    fetchDrinks.mockResolvedValueOnce(
+      {
+        drinks: [
+          { strDrink: 'Drink2A', idDrink: '2', strDrinkThumb: 'linkFor2' },
+        ]
+      }
+    );
 
     render(
       <Provider store={store}>
@@ -75,38 +88,6 @@ describe('App', () => {
     expect(drink3Image).toBeInTheDocument();
     expect(drink4Name).toBeInTheDocument();
   });
-
-  // it('Should show an error message if there is no matching search', () => {
-  //    fetchDrinks.mockResolvedValue({});
-  //   const foundNothing = null;
-  //   fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
-
-  //   render(
-  //     <Provider store={store}>
-  //       <MemoryRouter>
-  //         <App />
-  //       </MemoryRouter>
-  //     </Provider>
-  //   );
-
-  //   const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
-  //   const searchBox = screen.getByPlaceholderText('Vodka');
-  //   const findButton = screen.getByRole('button', { name: 'Find' });
-
-  //   fireEvent.change(searchBox, { target: { value: 'Gin' } });
-  //   fireEvent.click(preferenceBoth);
-  //   fireEvent.click(findButton);
-
-  //   const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
-  //   const drink2Name = screen.getByText('Drink2A');
-  //   const drink3Image = screen.getByTitle('Drink3A');
-  //   const drink4Name = screen.getByText('Drink4A');
-
-  //   expect(drink1Image).toBeInTheDocument();
-  //   expect(drink2Name).toBeInTheDocument();
-  //   expect(drink3Image).toBeInTheDocument();
-  //   expect(drink4Name).toBeInTheDocument();
-  // });
 
   it('Should Change page when a drink from the list is selected', async () => {
     fetchDrinks.mockResolvedValue({});
@@ -311,5 +292,31 @@ describe('App', () => {
 
     expect(drink2Image).toBeInTheDocument();
   });
-  // It should deal with fail in nonalcoholic drink fetch
+
+  it('should display an error message if the ingredient searched returns nothing', async () => {
+    fetchDrinks.mockResolvedValue({});
+    const noDrinksFound = null
+    fetchDrinkByIngredient.mockResolvedValueOnce(noDrinksFound);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Cheese' } });
+    fireEvent.click(preferenceBoth);
+    fireEvent.click(findButton);
+
+    const errorMsg = await waitFor(() => screen.getByRole('heading', {
+      name: 'We\'re sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.'}));
+
+    expect(errorMsg).toBeInTheDocument(); 
+  })
 });
