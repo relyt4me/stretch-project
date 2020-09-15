@@ -66,6 +66,22 @@ In terminal, go to the project directory and run 'npm start' to open the project
 
 ![ingredient not found with search](src/assets/ingredient-not-found.gif)
 
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.  
+
+See the [open issues](https://github.com/relyt4me/stretch-project/issues) for a list of proposed features (and known issues).
+
+- Fork the Project
+
+- Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+
+- Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+
+- Push to the Branch (`git push origin feature/AmazingFeature`)
+
+- Open a Pull Request
+
 ## Authors
 
 👤 **Tyler Haglund**
