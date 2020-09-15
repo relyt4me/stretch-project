@@ -114,6 +114,19 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
+  it('should have a type of ADD_RECIPE_ID', () => {
+    const recipeId = '10'
+
+    const expectedAction = {
+      type: 'ADD_RECIPE_ID',
+      recipeId: '10'
+    }
+
+    const result = actions.addRecipeId(recipeId);
+
+    expect(result).toEqual(expectedAction);
+  });
+
   it('should have a type of ERRORED', () => {
     const error = 'Oops, that didn\'t work!'
 
@@ -135,6 +148,18 @@ describe('actions', () => {
     }
 
     const result = actions.resetError();
+
+    expect(result).toEqual(expectedAction);
+  });
+
+  it('should have a type of RESET_RECIPE', () => {
+
+    const expectedAction = {
+      type: 'RESET_RECIPE',
+      drinkRecipe: {}
+    }
+
+    const result = actions.resetRecipe();
 
     expect(result).toEqual(expectedAction);
   });
