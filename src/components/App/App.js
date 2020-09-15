@@ -4,13 +4,10 @@ import './App.css';
 import Header from '../Header/Header';
 import Search from '../Search/Search';
 import DrinkRecipe from '../DrinkRecipe/DrinkRecipe';
-// import drinkData from '../DrinkRecipe/drinkData.js';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchDrinks } from '../../helpers/apiCalls';
-import { createAlcoholicDrinks, createNonAlcoholicDrinks, createError, addRecipeId, resetRecipe } from '../../actions';
-
-//change /drinkRecipe to /:drinkId when we start importing data from api
+import { createAlcoholicDrinks, createNonAlcoholicDrinks, createError, addRecipeId, resetRecipe, resetError } from '../../actions';
 
 class App extends Component {
   componentDidMount() {
@@ -40,6 +37,7 @@ class App extends Component {
           path='/'
           render={() => {
             this.props.resetRecipe();
+            this.props.resetError(); 
             return (
               <>
                 <Search />
@@ -58,6 +56,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchData: (type) => dispatch(collectDrinkData(type)),
     collectId: (id) => dispatch(addRecipeId(id)),
     resetRecipe: () => dispatch(resetRecipe()),
+    resetError: () => dispatch(resetError())
   };
 };
 
