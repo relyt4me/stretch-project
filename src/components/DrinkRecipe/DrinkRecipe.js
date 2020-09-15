@@ -42,11 +42,12 @@ export class DrinkRecipe extends Component {
       return (
         <section className='drink-recipe'>
           <div className='drink-data'>
+            <Link className='back-btn' to='/'>Back</Link>
             <img src={recipe.picture} className='drink-image' alt={`Glass of ${recipe.name}`} />
             <div className='drink-title'>
-              <h1 className='drink-name'>{recipe.name}</h1>
-              <h2>{recipe.type}</h2>
-              <h3>{recipe.glass}</h3>
+              <p className='drink-name'>{recipe.name}</p>
+              <h3>{recipe.type}</h3>
+              <h4>{recipe.glass}</h4>
             </div>
             <div className='ingredients'>
               <h2 className='ingredients-title'>Ingredients</h2>
