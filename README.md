@@ -1,4 +1,4 @@
-# Project Name (Think: Website/Game Name)
+# Fridge to Glass
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -7,7 +7,7 @@
 
 
 An image of the product logo.  
-![logo](images/image.png)
+![logo](../../assets/f2glogo.png)
 
 ## Table of Contents
 
@@ -18,23 +18,21 @@ An image of the product logo.
 - [Contributing](#contributing)
 - [Acknowledgements and Resources](#acknowledgements-and-resources)
 
-<!-- Breif Description -->
+<!-- Brief Description -->
 
 ## Brief Description
-(Ex: Uses, Game Rules, Overview)
-
-> Here I put the what is this and the why.
+We have created an app that allows a user to search for both alcoholic and non-alcoholic drink recipes that use an ingredient the user provides in the search. We wanted to create an app that helps people to see all of the drink options they have, often with ingredients they already have in their homes.
 
 ## How to use
-(can call strategy or uses can sometimes be conbined with above)
+User puts an ingredient they want to make a drink with in the search bar. They then choose the type of drinks they want (alcoholic, non-alcoholic, or both) and click 'Find Drinks' to get all the drinks that match their search. Users can click on the drink cards to get the full recipe.
 
-Here I put the answers to How
+Users can also click on the 'Random Drink' button to immediately see a recipe for a random drink.
 
 ## Built With
 
-- ex: javascript
-- ex: CSS
-- ex: HTML
+- React 16
+- Redux 4
+- CSS
 
 ## Installation
 
@@ -52,51 +50,39 @@ https://github.com/relyt4me/stretch-project
 
 ### How to see the product
 
-Here should be the info on running index.html or other last step opeining locally
-[Here should also be the link to the GitHub pages if necessary](https://google.com)
+In terminal, go to the project directory and run 'npm start' to open the project in the browser. Have fun finding a drink to try!
 
 ### Live version location if NEEDED
 
-[Live Link](https://google.com)
+[Deployed Site](https://google.com)
 
 ## Functionality
 
-![screenshot](images/image.png)
+![main app functionality](src/assets/main-functionality.gif)
 
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.  
-   
-See the [open issues](https://github.com/relyt4me/stretch-project/issues) for a list of proposed features (and known issues).
-
-- Fork the Project
-
-- Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-
-- Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-
-- Push to the Branch (`git push origin feature/AmazingFeature`)
-
-- Open a Pull Request
+![random drink functionality](src/assets/random-drink.gif)
 
 ## Authors
 
-👤 **Name**
-- Github: [gitHubHandle](link)
+👤 **Tyler Haglund**
+- Github: [relyt4me](https://github.com/relyt4me)
 - other link info if needed
 
-👤 **Name**
-- Github: [gitHubHandle](link)
+👤 **Taryn Martin**
+- Github: [tarynmartin](https://github.com/tarynmartin)
 - other link info if needed
 
+👤 **Rachel Williams**
+- Github: [rwilliams659](https://github.com/rwilliams659)
+- other link info if needed
 
 ## Acknowledgements and Resources
 
 [Original Project Link](https://frontend.turing.io/projects/module-3/stretch.html)
 
-Mentor mentions and why or other help outside the group
+[Heather Faerber](https://github.com/hfaerber) for providing help and feedback on testing with Redux.
+
+[Cocktail Database](https://www.thecocktaildb.com/api.php) API we used for our drink recipes.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
