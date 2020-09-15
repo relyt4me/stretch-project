@@ -97,7 +97,7 @@ See the [open issues](https://github.com/relyt4me/stretch-project/issues) for a 
 
 👤 **Rachel Williams**
 - Github: [rwilliams659](https://github.com/rwilliams659)
-- LinkedIn: [Tyler](https://www.linkedin.com/in/rachelsarahwilliams/)
+- LinkedIn: [Rachel](https://www.linkedin.com/in/rachelsarahwilliams/)
 
 ## Acknowledgements and Resources
 
