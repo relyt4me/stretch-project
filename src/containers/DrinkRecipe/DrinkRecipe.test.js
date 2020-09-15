@@ -32,7 +32,7 @@ describe('DrinkRecipe', () => {
     const drinkType = screen.getByText('Alcoholic');
     const drinkGlass = screen.getByText('Cocktail glass');
     const instructions = screen.getByText('Add alcohol');
-    const drinkPic = screen.getByAltText('glass of the drink');
+    const drinkPic = screen.getByAltText('Glass of Margarita');
     const ingredient = screen.getByText('1 1/2 oz', {exact: false})
 
     expect(drinkName).toBeInTheDocument();
