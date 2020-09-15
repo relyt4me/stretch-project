@@ -1,0 +1,35 @@
+.DrinkCard {
+  border: 1px solid gray;
+  border-radius: 0.8em;
+  box-shadow: 0 0 1.2em #f65c78;
+  background-color: white;
+}
+
+.DrinkCard:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.cocktail-img {
+  height: 27vh;
+  background-size: cover;
+  border-radius: 0.7em 0.7em 0 0;
+}
+
+.alcohol-tag {
+  margin-top: 0.5em;
+  padding: 0.3em;
+  float: right;
+  border-radius: 1em 0 0 1em;
+  border: 1px solid grey;
+  background-color: #c3f584;
+}
+
+.alcohol-info {
+  margin: 0;
+}
+
+.cocktail-name {
+  font-family: Beon;
+  text-align: center;
+}
