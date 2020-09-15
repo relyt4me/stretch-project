@@ -62,6 +62,10 @@ In terminal, go to the project directory and run 'npm start' to open the project
 
 ![random drink functionality](src/assets/random-drink.gif)
 
+![no recipes found error](src/assets/filter-no-recipes.gif)
+
+![ingredient not found with search](src/assets/ingredient-not-found.gif)
+
 ## Authors
 
 👤 **Tyler Haglund**
