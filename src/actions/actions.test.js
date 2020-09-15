@@ -126,4 +126,16 @@ describe('actions', () => {
 
     expect(result).toEqual(expectedAction);
   });
+
+  it('should have a type of RESET_ERROR', () => {
+
+    const expectedAction = {
+      type: 'RESET_ERROR',
+      error: ''
+    }
+
+    const result = actions.resetError();
+
+    expect(result).toEqual(expectedAction);
+  });
 })
