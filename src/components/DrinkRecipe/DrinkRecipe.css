@@ -8,6 +8,14 @@
   text-align: center;
 }
 
+.loading,
+.error-message {
+  color: #c3f584;
+  font-size: 8vh;
+  text-align: center;
+  padding: 10vw;
+}
+
 @media screen and (max-width: 1540px) {
   .drink-recipe {
     display: block;
@@ -16,6 +24,7 @@
     background-color: rgba(0, 0, 0, 0.2);
     color: #c3f584;
     align-items: center;
+    padding-top: 1%;
   }
 
   .drink-data {
