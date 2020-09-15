@@ -43,7 +43,7 @@ export class DrinkRecipe extends Component {
         <section className='drink-recipe'>
           <div className='drink-data'>
             <Link className='back-btn' to='/'>Back</Link>
-            <img src={recipe.picture} className='drink-image' alt='glass of the drink' />
+            <img src={recipe.picture} className='drink-image' alt={`Glass of ${recipe.name}`} />
             <div className='drink-title'>
               <p className='drink-name'>{recipe.name}</p>
               <h3>{recipe.type}</h3>
