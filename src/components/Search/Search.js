@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Search.css';
 import { connect } from 'react-redux';
-import { updateDrinksList, createError } from '../../actions';
+import { updateDrinksList, createError, resetError, resetDrinksList } from '../../actions';
 import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -27,6 +27,7 @@ export class Search extends Component {
   searchClick = (event) => {
     const { searchPhrase, preference } = this.state;
     event.preventDefault();
+    this.props.resetDrinksList(); 
     if (searchPhrase && preference) {
       fetchDrinkByIngredient(searchPhrase)
         .then((drinks) => {
@@ -118,10 +119,14 @@ export const mapDispatchToProps = (dispatch) => {
   return {
     handleSearch: (drinksList) => {
       dispatch(updateDrinksList(drinksList));
+      dispatch(resetError());
     },
     handleError: (error) => {
       dispatch(createError(error));
     },
+    resetDrinksList: () => {
+      dispatch(resetDrinksList())
+    }
   };
 };
 
@@ -132,4 +137,5 @@ Search.propTypes = {
   handleError: PropTypes.func,
   alcoholicDrinks: PropTypes.array,
   nonAlcoholicDrinks: PropTypes.array,
+  resetDrinksList: PropTypes.func
 };

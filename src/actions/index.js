@@ -5,6 +5,13 @@ export const updateDrinksList = (drinksList) => {
   }
 }
 
+export const resetDrinksList = () => {
+  return {
+    type: 'RESET_DRINKS_LIST',
+    drinksList: []
+  }
+}
+
 export const createAlcoholicDrinks = (alcoholicDrinks) => {
   return {
     type: 'CREATE_ALCOHOLIC_DRINKS',
@@ -37,6 +44,13 @@ export const createError = (error) => {
   return {
     type: 'ERRORED',
     error
+  }
+}
+
+export const resetError = () => {
+  return {
+    type: 'RESET_ERROR',
+    error: ''
   }
 }
 
