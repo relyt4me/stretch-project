@@ -17,7 +17,7 @@ describe('App', () => {
     store = createStore(rootReducer, applyMiddleware(thunk));
   });
 
-  it('Should display app on page load', async () => {
+  it('should display app on page load', async () => {
     fetchDrinks.mockResolvedValueOnce(
       {
         drinks: [
@@ -50,7 +50,7 @@ describe('App', () => {
     expect(welcomeHeading).toBeInTheDocument();
   });
 
-  it('Should show a list of search results based on a search', async () => {
+  it('should show a list of search results based on a search', async () => {
     fetchDrinks.mockResolvedValue({});
     const foundGinDrinks = {
       drinks: [
@@ -89,7 +89,7 @@ describe('App', () => {
     expect(drink4Name).toBeInTheDocument();
   });
 
-  it('Should Change page when a drink from the list is selected', async () => {
+  it('should change page when a drink from the list is selected', async () => {
     fetchDrinks.mockResolvedValue({});
     const foundGinDrinks = {
       drinks: [
@@ -142,7 +142,7 @@ describe('App', () => {
     expect(drinkGlass).toBeInTheDocument();
   });
 
-  it('Should Display a random drink when the random drink is clicked', async () => {
+  it('should display a random drink when the random drink is clicked', async () => {
     fetchDrinks.mockResolvedValue({});
 
     const mockDrinkRecipe = {
@@ -179,7 +179,7 @@ describe('App', () => {
     expect(drinkGlass).toBeInTheDocument();
   });
 
-  it('Should Return to the home page with previous search on logo click', async () => {
+  it('should return to the home page with previous search on logo click', async () => {
     fetchDrinks.mockResolvedValue({});
     const foundGinDrinks = {
       drinks: [
@@ -236,7 +236,7 @@ describe('App', () => {
     expect(drink2Image).toBeInTheDocument();
   });
 
-  it('Should Return to the home page with previous search on back click', async () => {
+  it('should return to the home page with previous search on back click', async () => {
     fetchDrinks.mockResolvedValue({});
     const foundGinDrinks = {
       drinks: [
@@ -318,5 +318,46 @@ describe('App', () => {
       name: 'We\'re sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.'}));
 
     expect(errorMsg).toBeInTheDocument(); 
-  })
+  });
+
+  it('should show an error on drink recipe page if a recipe can\'t be fetched', async () => {
+    fetchDrinks.mockResolvedValue({});
+    
+    const foundGinDrinks = {
+      drinks: [
+        { strDrink: 'Drink1NA', idDrink: '1', strDrinkThumb: 'linkFor1' },
+        { strDrink: 'Drink2A', idDrink: '2', strDrinkThumb: 'linkFor2' },
+        { strDrink: 'Drink3A', idDrink: '3', strDrinkThumb: 'linkFor3' },
+        { strDrink: 'Drink4A', idDrink: '4', strDrinkThumb: 'linkFor4' },
+      ],
+    };
+    
+    fetchDrinkByIngredient.mockResolvedValueOnce(foundGinDrinks);
+
+    fetchDrinkRecipe.mockResolvedValue({});
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
+
+    const preferenceBoth = await waitFor(() => screen.getByRole('radio', { name: 'Both' }));
+    const searchBox = screen.getByPlaceholderText('Vodka');
+    const findButton = screen.getByRole('button', { name: 'Find' });
+
+    fireEvent.change(searchBox, { target: { value: 'Gin' } });
+    fireEvent.click(preferenceBoth);
+    fireEvent.click(findButton);
+
+    const drink1Image = await waitFor(() => screen.getByTitle('Drink1NA'));
+
+    fireEvent.click(drink1Image);
+
+    const errorMsg = await waitFor(() => screen.getByText('We\'re sorry, we couldn\'t find that recipe!'));
+
+    expect(errorMsg).toBeInTheDocument(); 
+  }); 
 });
