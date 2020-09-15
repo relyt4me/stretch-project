@@ -1,11 +1,9 @@
 import React from 'react';
-import { DrinkRecipe, mapStateToProps, fetchRecipe, collectRecipe } from './DrinkRecipe';
-import { screen, render, waitFor } from '@testing-library/react';
+import { DrinkRecipe, mapStateToProps } from './DrinkRecipe';
+import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { createDrinkRecipe, createError } from '../../actions/index.js';
 jest.mock('../../helpers/apiCalls');
-import { fetchDrinkRecipe } from '../../helpers/apiCalls';
 
 describe('DrinkRecipe', () => {
   it('should render a recipe on the page when given an id', () => {
@@ -24,7 +22,12 @@ describe('DrinkRecipe', () => {
 
     render (
       <MemoryRouter>
-        <DrinkRecipe fetchRecipe={mockFetchRecipe} recipe={mockDrinkRecipe} />
+        <DrinkRecipe 
+          fetchRecipe={mockFetchRecipe} 
+          recipe={mockDrinkRecipe} 
+          drinkId='1'
+          hasErrored=''
+        />
       </MemoryRouter>
     )
 
@@ -32,7 +35,7 @@ describe('DrinkRecipe', () => {
     const drinkType = screen.getByText('Alcoholic');
     const drinkGlass = screen.getByText('Cocktail glass');
     const instructions = screen.getByText('Add alcohol');
-    const drinkPic = screen.getByAltText('glass of the drink');
+    const drinkPic = screen.getByAltText('Glass of Margarita');
     const ingredient = screen.getByText('1 1/2 oz', {exact: false})
 
     expect(drinkName).toBeInTheDocument();
@@ -47,7 +50,12 @@ describe('DrinkRecipe', () => {
 
     render (
       <MemoryRouter>
-        <DrinkRecipe fetchRecipe={mockFetchRecipe} recipe={{}} hasErrored={''}/>
+        <DrinkRecipe 
+          fetchRecipe={mockFetchRecipe} 
+          recipe={{}} 
+          drinkId='1'
+          hasErrored=''
+        />
       </MemoryRouter>
     )
 
@@ -60,7 +68,12 @@ describe('DrinkRecipe', () => {
 
     render (
       <MemoryRouter>
-        <DrinkRecipe fetchRecipe={mockFetchRecipe} recipe={{}} hasErrored={"We're sorry, we couldn't find that recipe!"}/>
+        <DrinkRecipe 
+          fetchRecipe={mockFetchRecipe} 
+          recipe={{}} 
+          drinkId=''
+          hasErrored={"We're sorry, we couldn't find that recipe!"}
+        />
       </MemoryRouter>
     )
 
@@ -84,7 +97,12 @@ describe('DrinkRecipe', () => {
 
     render (
       <MemoryRouter>
-        <DrinkRecipe fetchRecipe={mockFetchRecipe} recipe={mockDrinkRecipe} drinkId={'11007'}/>
+        <DrinkRecipe 
+          fetchRecipe={mockFetchRecipe} 
+          recipe={mockDrinkRecipe} 
+          drinkId={'11007'}
+          hasErrored=''
+        />
       </MemoryRouter>
     )
 
