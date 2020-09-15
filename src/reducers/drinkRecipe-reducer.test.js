@@ -9,7 +9,7 @@ describe('drinkRecipeReducer', () => {
   });
 
   it('should return the correct state if action is CREATE_DRINK_RECIPE', () => {
-    const initialState = [];
+    const initialState = {};
     const action = {
       type: 'CREATE_DRINK_RECIPE',
       drinkRecipe: {
@@ -40,12 +40,21 @@ describe('drinkRecipeReducer', () => {
   });
 
   it('should return the correct state if action is RESET_RECIPE', () => {
-    const initialState = [];
+    const initialState = {
+      id: '4',
+      name: 'Boozy Booze',
+      type: 'Alcoholic',
+      glass: 'Bottle',
+      instructions: 'Make that stuff',
+      picture: 'image',
+      ingredients: ['booze', 'more booze'],
+      ingredientAmounts: ['some', 'more'],
+    };
     const action = {
       type: 'RESET_RECIPE',
-      drinkRecipe: null,
+      drinkRecipe: {},
     };
-    const newState = null;
+    const newState = {};
 
     const result = drinkRecipeReducer(initialState, action);
 
