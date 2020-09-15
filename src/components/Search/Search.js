@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Search.css';
 import { connect } from 'react-redux';
-import { updateDrinksList, createError } from '../../actions';
+import { updateDrinksList, createError, resetError } from '../../actions';
 import { fetchDrinkByIngredient, fetchRandomDrink } from '../../helpers/apiCalls';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -118,6 +118,7 @@ export const mapDispatchToProps = (dispatch) => {
   return {
     handleSearch: (drinksList) => {
       dispatch(updateDrinksList(drinksList));
+      dispatch(resetError());
     },
     handleError: (error) => {
       dispatch(createError(error));
@@ -131,5 +132,5 @@ Search.propTypes = {
   handleSearch: PropTypes.func,
   handleError: PropTypes.func,
   alcoholicDrinks: PropTypes.array,
-  nonAlcoholicDrinks: PropTypes.array,
+  nonAlcoholicDrinks: PropTypes.array
 };

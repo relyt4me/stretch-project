@@ -3,18 +3,13 @@ import { Results, mapStateToProps } from './Results';
 import { screen, render} from '@testing-library/react';
 import '@testing-library/jest-dom'
 import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from '../../reducers/index';
 import '@testing-library/jest-dom'
 
 describe('Results component', () => {
 
   it('should display a message to perform a search on load', () => {
-    const store = createStore(rootReducer);
     
     render(
-      <Provider store={store}>
         <BrowserRouter>
           <Results 
             drinksList={null}
@@ -22,7 +17,6 @@ describe('Results component', () => {
             nonAlcoholicDrinks={[]}
           /> 
         </BrowserRouter>
-      </Provider>
     )
 
     const welcomeHeading = screen.getByText('Welcome to Fridge To Glass!');
@@ -45,10 +39,7 @@ describe('Results component', () => {
       }
     ]
 
-    const store = createStore(rootReducer);
-
     render(
-      <Provider store={store}>
         <BrowserRouter>
           <Results 
             drinksList={mockDrinks}
@@ -56,7 +47,6 @@ describe('Results component', () => {
             nonAlcoholicDrinks={[]}
           />
         </BrowserRouter>
-      </Provider>
     )
 
     const recipeCard1Name = screen.getByText('Margarita');
@@ -69,19 +59,31 @@ describe('Results component', () => {
 
   it('should display an error message if there are no results to display', () => {
 
-    const store = createStore(rootReducer);
-
     render(
-      <Provider store={store}>
         <BrowserRouter>
           <Results drinksList={[]} />
         </BrowserRouter>
-      </Provider>
     )
 
     const noResults = screen.getByText('Sorry, we couldn\'t find any cocktails that match your search.');
 
     expect(noResults).toBeInTheDocument(); 
+  });
+
+  it('should display the error from the redux store if there is one', () => {
+
+    render(
+      <BrowserRouter>
+        <Results 
+          drinksList={[]} 
+          errorMessage={'We\'re sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.'}
+        />
+      </BrowserRouter>
+    )
+
+    const noResults = screen.getByText('We\'re sorry we could not find that ingredient. Check that you have spelled the ingredient correctly or try a different search.');
+
+    expect(noResults).toBeInTheDocument();
   });
 
   it('should only return the necessary info from the redux store', () => {
@@ -104,13 +106,15 @@ describe('Results component', () => {
       alcoholicDrinks: [],
       nonAlcoholicDrinks: [],
       drinkId: '',
-      drinkRecipe: {}
+      drinkRecipe: {},
+      errorMessage: ''
     }
 
     const expected = {
       drinksList: mockDrinks,
       alcoholicDrinks: [],
-      nonAlcoholicDrinks: []
+      nonAlcoholicDrinks: [],
+      errorMessage: ''
     }
 
     const props = mapStateToProps(mockState);

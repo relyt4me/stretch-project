@@ -40,6 +40,13 @@ export const createError = (error) => {
   }
 }
 
+export const resetError = () => {
+  return {
+    type: 'RESET_ERROR',
+    error: ''
+  }
+}
+
 export const resetRecipe = () => {
   return {
     type: 'RESET_RECIPE',

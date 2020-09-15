@@ -103,6 +103,50 @@ describe('actions', () => {
     expect(result).toEqual(expectedAction);
   });
 
+  it('should have a type of ADD_RECIPE_ID', () => {
+    const recipeId = '10'
+
+    const expectedAction = {
+      type: 'ADD_RECIPE_ID',
+      recipeId: '10'
+    }
+
+    const result = actions.addRecipeId(recipeId);
+
+    expect(result).toEqual(expectedAction);
+  });
+
+  it('should have a type of CREATE_DRINK_RECIPE', () => {
+    const drinkRecipe = {
+      id: '11007',
+      name: 'Margarita',
+      type: 'Alcoholic',
+      glass: 'Cocktail glass',
+      instructions: "Add alcohol. Drink it.",
+      picture: "https://www.thecocktaildb.com",
+      ingredients: ['Tequila', 'Triple sec', 'Lime juice', 'Salt'],
+      ingredientAmounts: ['1 1/2 oz', '1/2 oz', '1 oz']
+    }
+
+    const expectedAction = {
+      type: 'CREATE_DRINK_RECIPE',
+      drinkRecipe: {
+        id: '11007',
+        name: 'Margarita',
+        type: 'Alcoholic',
+        glass: 'Cocktail glass',
+        instructions: "Add alcohol. Drink it.",
+        picture: "https://www.thecocktaildb.com",
+        ingredients: ['Tequila', 'Triple sec', 'Lime juice', 'Salt'],
+        ingredientAmounts: ['1 1/2 oz', '1/2 oz', '1 oz']
+      }
+    }
+
+    const result = actions.createDrinkRecipe(drinkRecipe);
+
+    expect(result).toEqual(expectedAction);
+  });
+
   it('should have a type of ERRORED', () => {
     const error = 'Oops, that didn\'t work!'
 
@@ -112,6 +156,30 @@ describe('actions', () => {
     }
 
     const result = actions.createError(error);
+
+    expect(result).toEqual(expectedAction);
+  });
+
+  it('should have a type of RESET_ERROR', () => {
+
+    const expectedAction = {
+      type: 'RESET_ERROR',
+      error: ''
+    }
+
+    const result = actions.resetError();
+
+    expect(result).toEqual(expectedAction);
+  });
+
+  it('should have a type of RESET_RECIPE', () => {
+
+    const expectedAction = {
+      type: 'RESET_RECIPE',
+      drinkRecipe: {}
+    }
+
+    const result = actions.resetRecipe();
 
     expect(result).toEqual(expectedAction);
   });

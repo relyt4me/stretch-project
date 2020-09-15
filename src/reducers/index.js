@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   drinksList: drinksListReducer,
   nonAlcoholicDrinks: nonAlcoholicDrinksReducer,
   alcoholicDrinks: alcoholicDrinksReducer,
-  errorMessage: errorReducer,
+  errorMessage: errorReducer
 });
 
 export default rootReducer;
