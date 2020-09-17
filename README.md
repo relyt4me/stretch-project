@@ -51,9 +51,9 @@ https://github.com/relyt4me/stretch-project
 
 In terminal, go to the project directory and run 'npm start' to open the project in the browser. Have fun finding a drink to try!
 
-### Live version
+<!-- ### Live version -->
 
-[Deployed Site](https://fridge-to-glass.herokuapp.com/)
+<!-- [Deployed Site](https://fridge-to-glass.herokuapp.com/) -->
 
 ## Functionality
 
