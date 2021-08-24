@@ -24,11 +24,12 @@
   padding: 10vw;
 }
 
-@media screen and (max-width: 1540px) {
+@media screen and (max-width: 5000px) {
   .drink-recipe {
     display: block;
-    width: 90%;
-    margin: 2vw;
+    height: 88vh;
+    width: 1500px;
+    margin: auto;
     background-color: rgba(0, 0, 0, 0.2);
     color: #c3f584;
     align-items: center;
@@ -69,7 +70,7 @@
 
   .ingredients,
   .instructions {
-    height: 35vh;
+    /* height: 35vh; */
     font-size: 1.5em;
     margin-bottom: 1em;
   }
@@ -84,6 +85,13 @@
     grid-row: 3;
     overflow-y: scroll;
     margin-right: 1em;
+  }
+}
+
+@media screen and (max-width: 1540px) {
+  .drink-recipe{
+    width: 90%;
+    margin: auto;
   }
 }
 
